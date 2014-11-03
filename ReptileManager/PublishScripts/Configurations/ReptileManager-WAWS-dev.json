@@ -1,0 +1,21 @@
+{
+    "environmentSettings": {
+        "webSite": {
+            "name": "ReptileManager",
+            "location": "North Europe"
+        },
+        "databases": [
+            {
+                "connectionStringName": "DefaultConnection",
+                "databaseName": "ReptileManager_db",
+                "serverName": "ugixly9vtm",
+                "user": "Dbconnection",
+                "password": "",
+                "edition": "",
+                "size": "",
+                "collation": "",
+                "location": "North Europe"
+            }
+        ]
+    }
+}
