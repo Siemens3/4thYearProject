@@ -36,6 +36,7 @@ namespace ReptileWeb.Controllers
         }
 
         // GET: ReptileManager/Create
+        [Authorize(Roles = "canEdit")]
         public ActionResult Create()
         {
             return View();
@@ -44,8 +45,10 @@ namespace ReptileWeb.Controllers
         // POST: ReptileManager/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "canEdit")]
         public ActionResult Create([Bind(Include = "Id,Gender,SpeciesName,ScientificName,CommonName,Born,Morph,Venomous")] Reptile reptile)
         {
             if (ModelState.IsValid)
@@ -59,6 +62,7 @@ namespace ReptileWeb.Controllers
         }
 
         // GET: ReptileManager/Edit/5
+        [Authorize(Roles = "canEdit")]
         public ActionResult Edit(string id)
         {
             if (id == null)

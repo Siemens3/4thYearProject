@@ -14,7 +14,7 @@ namespace ReptileWeb.Migrations
         {
             AutomaticMigrationsEnabled = false;
         }
-        // http://azure.microsoft.com/en-us/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/
+     //    http://azure.microsoft.com/en-us/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/
              bool AddUserAndRole(ReptileWeb.Models.ApplicationDbContext context)
                 {
                     //for premuim members only allow them to access certain functions 
