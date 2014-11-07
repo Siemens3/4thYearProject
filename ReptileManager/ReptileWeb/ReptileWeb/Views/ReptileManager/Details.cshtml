@@ -1,0 +1,74 @@
+﻿@model ReptileWeb.Models.Reptile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reptile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpeciesName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpeciesName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScientificName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScientificName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Born)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Born)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Morph)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Morph)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Venomous)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Venomous)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
