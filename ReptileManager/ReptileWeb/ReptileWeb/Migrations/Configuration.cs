@@ -26,7 +26,7 @@ namespace ReptileWeb.Migrations
                         new UserStore<ApplicationUser>(context));
                     var user = new ApplicationUser()
                     {
-                        UserName = "stephenkenny@outlook.ie",
+                        UserName = "steo.kenny@hotmail.co.uk",
                     };
                     ir = um.Create(user, "03Dec93@");
                     if (ir.Succeeded == false)

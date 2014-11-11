@@ -54,15 +54,15 @@ namespace ReptileWeb
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+              appId: "712107762209812",
+               appSecret: "0b00be45ad1005359eb2e07525dbf162");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "292657348551-uue07o3qtg8pr10fjc100l3tftff7elv.apps.googleusercontent.com",
+                ClientSecret = "WfRbw_1HVPXxlpFu7PkI4D3M"
+            });
         }
     }
 }
