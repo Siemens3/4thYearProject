@@ -6,8 +6,8 @@
 *.user
 *.sln.docstates
 
-*.ReptileManager.PrivateSettings.config
-*.ReptileManager.ConnectionStrings.config
+PrivateSettings.config
+ConnectionStrings.config
 # Build results
 
 [Dd]ebug/
