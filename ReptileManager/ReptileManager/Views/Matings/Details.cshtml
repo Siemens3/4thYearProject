@@ -1,0 +1,50 @@
+﻿@model ReptileManager.Models.Mating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Mating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reptile.SpeciesName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reptile.SpeciesName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Event)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Event)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mateID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MatingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

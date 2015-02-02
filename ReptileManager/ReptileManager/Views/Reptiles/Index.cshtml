@@ -1,0 +1,215 @@
+﻿@model IEnumerable<ReptileManager.Models.Reptile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpeciesName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScientificName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommonName)
+        </th>
+      @*<th>
+            @Html.DisplayNameFor(model => model.Born)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Morph)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venomous)
+        </th>
+         <th>
+           @Html.DisplayNameFor(model => model.Weight)
+        </th>   
+        <th>
+            @Html.DisplayNameFor(model => model.WeightProgress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Food)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdultSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Habitat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Breeder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BreederEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClutchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForSale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NickName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenseNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChipNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpeciesNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FatherNotInDb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MotherNotInDb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeedInterval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TubeBoxNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+          @Html.DisplayNameFor(model => model.SalesCardComment) 
+        </th>*@
+        <th></th> 
+    </tr>
+             
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpeciesName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScientificName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommonName)
+        </td>
+     @*   <td>
+            @Html.DisplayFor(modelItem => item.Born)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Morph)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Venomous)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightProgress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Origin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Food)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdultSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Habitat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Breeder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BreederEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClutchID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForSale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NickName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LicenseNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChipNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpeciesNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FatherNotInDb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MotherNotInDb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeedInterval)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TubeBoxNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesCardComment)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReptileId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReptileId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReptileId })
+        </td>
+    </tr>
+    
+}
+
+</table>

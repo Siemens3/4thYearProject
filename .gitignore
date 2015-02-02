@@ -5,6 +5,8 @@
 *.suo
 *.user
 *.sln.docstates
+*.PrivateSettings.config
+*.ConnectionStrings.config
 
 # Build results
 

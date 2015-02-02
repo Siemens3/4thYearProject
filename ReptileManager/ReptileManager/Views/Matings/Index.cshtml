@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ReptileManager.Models.Mating>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reptile.ReptileId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reptile.NickName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mateID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reptile.NickName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mateID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MatingId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MatingId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MatingId })
+        </td>
+    </tr>
+}
+
+</table>
