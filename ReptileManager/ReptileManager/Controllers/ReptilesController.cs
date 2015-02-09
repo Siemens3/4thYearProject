@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ReptileManager.Models;
 using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
 
 
 namespace ReptileManager.Controllers
@@ -27,7 +28,7 @@ namespace ReptileManager.Controllers
           ViewBag.Message = "Your Qr codes for this reptile";
           var QrCodeToRetrieve = await db.Reptiles.FindAsync(id);
 
-            //var convertedImage = QrCodeToRetrieve.byteArrayToImage(QrCodeToRetrieve.QRCode);
+        //  var convertedImage = QrCodeToRetrieve.byteArrayToImage(QrCodeToRetrieve.QRCode);
 
           byte[] imgBytes = QrCodeToRetrieve.QRCode;
           
@@ -78,6 +79,7 @@ namespace ReptileManager.Controllers
             
                 if (ModelState.IsValid)
                 {
+
                     if (upload != null && upload.ContentLength > 0)
                     {
                         var image = new File
@@ -88,8 +90,11 @@ namespace ReptileManager.Controllers
                         };
                         using (var reader = new System.IO.BinaryReader(upload.InputStream))
                         {
+                            
                             image.Content = reader.ReadBytes(upload.ContentLength);
+                           
                         }
+                       
                         reptile.Files = new List<File> { image };
                     }
                     //creates qr code and saves it as binary data

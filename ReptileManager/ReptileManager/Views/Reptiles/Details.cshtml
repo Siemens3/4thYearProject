@@ -4,299 +4,312 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>  
-
-
-    <div>
-        <h4>Reptile</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.SpeciesName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.SpeciesName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ScientificName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ScientificName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CommonName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CommonName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Born)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Born)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Morph)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Morph)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Venomous)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Venomous)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Weight)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Weight)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.WeightProgress)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.WeightProgress)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Origin)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Origin)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Food)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Food)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FeedingType)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FeedingType)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AdultSize)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AdultSize)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Habitat)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Habitat)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Breeder)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Breeder)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.BreederEmail)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BreederEmail)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Cities)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Cities)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ClutchID)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ClutchID)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ForSale)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ForSale)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.NickName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NickName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LicenseNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LicenseNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ChipNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ChipNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.SpeciesNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.SpeciesNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FatherNotInDb)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FatherNotInDb)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.MotherNotInDb)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.MotherNotInDb)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FeedInterval)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FeedInterval)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DueDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DueDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TubeBoxNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TubeBoxNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Note)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Note)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.SalesCardComment)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.SalesCardComment)
-            </dd>
-            @if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
-            {
-                <dt>
-                    Image
-                </dt>
-                <dd>
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" />
-                </dd>
-            }
-
-        </dl>
+<h2>Details</h2> 
+ 
+<div class="container">
+
+
+    <hr />
+    <div class="well">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SpeciesName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SpeciesName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ScientificName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ScientificName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CommonName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CommonName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Born)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Born)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Morph)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Morph)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Venomous)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Venomous)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Weight)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Weight)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WeightProgress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.WeightProgress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Origin)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Origin)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Food)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Food)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FeedingType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FeedingType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AdultSize)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AdultSize)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Habitat)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Habitat)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Breeder)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Breeder)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BreederEmail)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BreederEmail)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cities)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Cities)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClutchID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClutchID)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ForSale)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ForSale)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NickName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NickName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LicenseNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LicenseNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ChipNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ChipNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SpeciesNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SpeciesNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FatherNotInDb)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FatherNotInDb)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MotherNotInDb)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MotherNotInDb)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FeedInterval)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FeedInterval)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DueDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DueDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TubeBoxNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TubeBoxNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Note)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Note)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SalesCardComment)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SalesCardComment)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <dl class="dl-horizontal">
+                    @if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
+                    {
+                        <dd>
+                            <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
+                        </dd>
+                    }
+                </dl>
+            </div>
+
+        </div>
 
     </div>
 
 
 
-    <tr>
-        <td>
-            @Html.ActionLink("QRCode", "Images", new { id = Model.ReptileId }) |
-        </td>
-        <td>
-            
-               
-            
-            @Html.ActionLink("Mating", "Mating", new { id = Model.ReptileId })
-        </td>|
-        <td>@Html.ActionLink("Notification", "Notification", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Other", "Other", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Medication", "Medication", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Shed", "Shed", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Cleaning", "Cleaning", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Feeding", "Feeding", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Ultrasound", "Ultrasound", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Note", "Note", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Weight", "Weight", new { id = Model.ReptileId })</td> |
-        <td>@Html.ActionLink("Length", "Length", new { id = Model.ReptileId })</td>
-    </tr>
 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="details-list">
+                    @Html.ActionLink("QRCode", "Images", new { id = Model.ReptileId })
+                </div>
+                @Html.ActionLink("Mating", "Mating", new { id = Model.ReptileId })
+                @Html.ActionLink("Notification", "Notification", new { id = Model.ReptileId })
+                @Html.ActionLink("Other", "Other", new { id = Model.ReptileId })
+                @Html.ActionLink("Medication", "Medication", new { id = Model.ReptileId })
+                @Html.ActionLink("Shed", "Shed", new { id = Model.ReptileId })
+                @Html.ActionLink("Cleaning", "Cleaning", new { id = Model.ReptileId })
+                @Html.ActionLink("Feeding", "Feeding", new { id = Model.ReptileId })
+                @Html.ActionLink("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })
+                @Html.ActionLink("Ultrasound", "Ultrasound", new { id = Model.ReptileId })
+                @Html.ActionLink("Note", "Note", new { id = Model.ReptileId })
+                @Html.ActionLink("Weight", "Weight", new { id = Model.ReptileId })
+                @Html.ActionLink("Length", "Length", new { id = Model.ReptileId })
+            </div>
+        </div>
+    </div>
+</div>
 
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId }) |
