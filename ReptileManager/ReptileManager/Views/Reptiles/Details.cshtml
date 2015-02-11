@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<link href="@Url.Content("~/Content/DetailsPage.css")" rel="stylesheet" type="text/css" />
 <h2>Details</h2> 
  
 <div class="container">
@@ -270,14 +270,14 @@
                 </dl>
             </div>
             <div class="col-xs-6 col-sm-3">
-                <dl class="dl-horizontal">
+                
                     @if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
                     {
-                        <dd>
+                       
                             <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
-                        </dd>
+                       
                     }
-                </dl>
+               
             </div>
 
         </div>
@@ -292,7 +292,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="details-list">
-                    @Html.ActionLink("QRCode", "Images", new { id = Model.ReptileId })
+                    <div class="left">
+                        @Html.ActionLink("QRCode", "Images", new { id = Model.ReptileId })
+                    </div>
                 </div>
                 @Html.ActionLink("Mating", "Mating", new { id = Model.ReptileId })
                 @Html.ActionLink("Notification", "Notification", new { id = Model.ReptileId })

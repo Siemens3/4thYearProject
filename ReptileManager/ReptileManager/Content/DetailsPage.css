@@ -1,8 +1,16 @@
 ﻿.details-list
 {
-    background-color:blue;
+    background-color:#0BB5FF;
     color:white;
     padding:9px;
     font-weight:bold;
     height:18px;
+}
+
+.details-list div.left {
+    float:left;
+}
+
+.details-list a {
+    color:white;
 }

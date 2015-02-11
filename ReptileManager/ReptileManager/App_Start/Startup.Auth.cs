@@ -51,17 +51,18 @@ namespace ReptileManager
             //    clientSecret: "");
 
             app.UseTwitterAuthentication(
-               consumerKey: "jnlcuItIqqfO4AllWpE47YLJ4",
-               consumerSecret: "fxky3C0sDA6kMS2SBmuGUwu5JKGIdeptat8091Zq654wYeFDE5");
+
+               consumerKey: "TwitterClientID",
+               consumerSecret: "TwitterClientSecret");
 
             app.UseFacebookAuthentication(
-               appId: "712107762209812",
-               appSecret: "3ab4fa210db3f0b468f1570558b6b53b");
+               appId: "FacebookClientID",
+               appSecret: "FacebookClientSecret");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "431452227144-6d3hps5ss55ao7auf3fu6dqcehu6dl78.apps.googleusercontent.com",
-                ClientSecret = "o0eLACoplBcqwnoFqMzzEPsU"
+                ClientId = "GoogleClientID",
+                ClientSecret = "GoogleClientSecret"
             });
         }
     }
