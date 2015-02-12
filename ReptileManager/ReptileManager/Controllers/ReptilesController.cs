@@ -266,7 +266,19 @@ namespace ReptileManager.Controllers
             
             return View(mating);
         }
-        
+        public async Task<ActionResult> MatingDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mating mating = await db.Matings.FindAsync(id);
+            if (mating == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mating);
+        }
         // GET: Notifications/Create
         public async Task<ActionResult> Notification(string id, Notification notifi)
         {

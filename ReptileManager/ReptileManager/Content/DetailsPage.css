@@ -1,16 +1,5 @@
-﻿.details-list
-{
-    background-color:#0BB5FF;
-    color:white;
-    padding:9px;
-    font-weight:bold;
-    height:18px;
+﻿.details-list-separator {
+  height: 1px;
+  background-color: #ccc;
 }
 
-.details-list div.left {
-    float:left;
-}
-
-.details-list a {
-    color:white;
-}
