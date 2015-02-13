@@ -8,6 +8,7 @@ using ReptileManager.Models;
 using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System;
 
 
 namespace ReptileManager.Controllers
@@ -36,10 +37,24 @@ namespace ReptileManager.Controllers
             return File(imgBytes,"image/png");
           }
 
-     
        
 
-     
+
+/*
+       public async Task<ActionResult> MatingDetails(int? id)
+       {
+           if (id == null)
+           {
+               return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+           }
+           Mating mating = await db.Matings.FindAsync(id);
+           if (mating == null)
+           {
+               return HttpNotFound();
+           }
+           return View(mating);
+       }
+ * */
 
       
 
@@ -50,7 +65,25 @@ namespace ReptileManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewModel vm = new ViewModel();
+
             Reptile reptile = await db.Reptiles.Include(r => r.Files).SingleOrDefaultAsync(r => r.ReptileId == id);
+            Mating mating = await db.Matings.Include(m => new { m.Date, m.Event }).SingleOrDefaultAsync(r => r.ReptileId == id);
+            
+            vm.AllMatings = mating;
+                
+             
+
+           // Mating mating = await db.Matings.Include(r => r.).Where(r => r.ReptileId == id);
+            // return all mating details assocaited with this ID and pass them to the view
+ 
+           // var matingList = db.Matings.Where(m => m.mateID.Contains(id)).Select(d => new { d.Date, d.Event }).ToListAsync();
+
+          //  ViewData["mating"] = matingList;
+
+
+
+           
             if (reptile == null)
             {
                 return HttpNotFound();
@@ -266,19 +299,7 @@ namespace ReptileManager.Controllers
             
             return View(mating);
         }
-        public async Task<ActionResult> MatingDetails(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Mating mating = await db.Matings.FindAsync(id);
-            if (mating == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mating);
-        }
+       
         // GET: Notifications/Create
         public async Task<ActionResult> Notification(string id, Notification notifi)
         {

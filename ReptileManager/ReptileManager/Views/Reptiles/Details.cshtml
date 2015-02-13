@@ -1,14 +1,14 @@
-﻿@model ReptileManager.Models.Reptile 
+﻿@model ReptileManager.Models.Reptile
 
 @{
     ViewBag.Title = "Details";
 }
 <link href="@Url.Content("~/Content/DetailsPage.css")" rel="stylesheet" type="text/css" />
-<h2>Details</h2> 
- 
+<h2>Details</h2>
 
 
-    <div class="container-fluid">
+
+<div class="container-fluid">
     <hr />
     <div class="well">
         <div class="row">
@@ -285,184 +285,204 @@
 
 
 
-        <div class="details-list-separator"></div>
+    <div class="details-list-separator"></div>
     <div class="row">
-       
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-link"></span>
-                        <a href="@Url.Action("QRCode", "Images", new { id = Model.ReptileId })" data-fold-catagory="matings"><span>QRCode</span></a>
-                        </div>
-                  
-                    </div>
-                    <div class="col-md-4">
-                        <div class="pull-right">
-                          <> 
-                        </div>
-                      
-                    </div>
-              
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-link"></span>
+                <a href="@Url.Action("QRCode", "Images", new { id = Model.ReptileId })" data-fold-catagory="matings"><span>QRCode</span></a>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <>
+            </div>
+
+        </div>
+
         <div class="col-md-8">
             <div class="media-left">
                 <span class="glyphicon glyphicon-plus-sign"></span>
                 <a href="@Url.Action("Mating", "Mating", new { id = Model.ReptileId })"><span>Mating</span></a>
             </div>
-           
+
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <a href="#matings" class="glyphicon glyphicon-resize-full" data--fold-category="matings"></a>
+
             </div>
-         <div class="col-md-4">
-                <div class="pull-right">
-                    <a href=""
-                    <span class="glyphicon glyphicon-resize-full"></span>
-                </div>
-               
+
+        </div>
+        <div style="clear:both"></div>
+        <div class="event-list matings" style="display: none;">
+            @*
+                @foreach(var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <a href="@Html.ActionLink("Edit", "Edit", new { id = item.ReptileId })" class="btn">Edit</a>
+                                <a href="@Html.ActionLink("Delete", "Delete", new { id = item.ReptileId })" class="btn-danger" data-confirm="Are you sure?" rel="nofollow"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DisplayFor(ModelItem => item.Date)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DisplayFor(ModelItem => item.Event)
+                        </div>
+                    </div>
+                } *@
+        </div>
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Notification", "Notification", new { id = Model.ReptileId })"><span>Notification</span></a>
             </div>
-          
-            <div class="col-md-8">
-                <div class="media-left">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    <a href="@Url.Action("Notification", "Notification", new { id = Model.ReptileId })"><span>Notification</span></a>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
             </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <span class="glyphicon glyphicon-resize-full"></span>
-                </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Other", "Other", new { id = Model.ReptileId })"><span>Other</span></a>
             </div>
-           
-            <div class="col-md-8">
-                <div class="media-left">
-                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                    <a href="@Url.Action("Other", "Other", new { id = Model.ReptileId })"><span>Other</span></a>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
             </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <span class="glyphicon glyphicon-resize-full"></span>
-                </div>
-                </div>
-             
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Medication", "Medication", new { id = Model.ReptileId })"><span>Medication</span></a>
-                    </div>
-                </div>
-            <div class="col-md-4">
-                <div class="pull-right">
-                    <span class="glyphicon glyphicon-resize-full"></span>
-                </div>
-                </div>
-              
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Shed", "Shed", new { id = Model.ReptileId })"><span>Shed</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
+        </div>
 
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Cleaning", "Cleaning", new { id = Model.ReptileId })"><span>Cleaning</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-            
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Feeding", "Feeding", new { id = Model.ReptileId })"><span>Feeding</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })"><span>BreedingCycle</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Ultrasound", "Ultrasound", new { id = Model.ReptileId })"><span>Ultrasound</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Note", "Note", new { id = Model.ReptileId })"><span>Note</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Weight", "Weight", new { id = Model.ReptileId })"><span>Weight</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-               
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        <a href="@Url.Action("Length", "Length", new { id = Model.ReptileId })"><span>Length</span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Medication", "Medication", new { id = Model.ReptileId })"><span>Medication</span></a>
             </div>
-        <div class="details-list-separator"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
             </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Shed", "Shed", new { id = Model.ReptileId })"><span>Shed</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Cleaning", "Cleaning", new { id = Model.ReptileId })"><span>Cleaning</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Feeding", "Feeding", new { id = Model.ReptileId })"><span>Feeding</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })"><span>BreedingCycle</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Ultrasound", "Ultrasound", new { id = Model.ReptileId })"><span>Ultrasound</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Note", "Note", new { id = Model.ReptileId })"><span>Note</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Weight", "Weight", new { id = Model.ReptileId })"><span>Weight</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <a href="@Url.Action("Length", "Length", new { id = Model.ReptileId })"><span>Length</span></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+    </div>
+    <div class="details-list-separator"></div>
+</div>
 
 
 <br />
@@ -470,4 +490,3 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-  

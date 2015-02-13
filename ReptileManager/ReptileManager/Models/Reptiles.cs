@@ -14,6 +14,8 @@ using System.Web;
 // http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files // image tutorial 
 namespace ReptileManager.Models
 {
+
+    
     public enum Gender { Male, Female, Unknow }
     public enum WeightProgress { PlusWeight, MinusWeight }
     public enum FeedingType
