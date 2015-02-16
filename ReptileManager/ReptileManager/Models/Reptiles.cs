@@ -138,8 +138,9 @@ namespace ReptileManager.Models
     }
     public enum Event { Introduction, Courting, Breeding, Seperated }
     
-   
+
     
+   
     public class Reptile
     {
         
@@ -269,8 +270,11 @@ namespace ReptileManager.Models
                        return (Image)b;
                     }
          */
-    }
-    
+        
+
+    } 
+  
+
   public class File
   {
       public int FileId { get; set; }
@@ -284,7 +288,11 @@ namespace ReptileManager.Models
       public virtual Reptile Reptile { get; set; }
   }
   
-    
+    public class ParentView
+    {
+        public  Reptile Reptiles { get; set; }
+        public  Mating Matings { get; set; }
+    }
       // one to many relationships
      // Do not want users setting Ids of any records apart from the reptile
      public class Mating
@@ -292,6 +300,8 @@ namespace ReptileManager.Models
         
          public int MatingId { get; set; } // Do not want users setting Ids of any records apart from the reptile
          public Event Event { get; set; }
+         //[DataType(DataType.Date)]
+         //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]      -----------------add later ---------------
          public DateTime Date { get; set; }
           [Display(Name = "Mate Id")]
          public String mateID { get; set; }

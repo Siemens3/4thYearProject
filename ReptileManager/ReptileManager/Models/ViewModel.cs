@@ -7,8 +7,11 @@ namespace ReptileManager.Models
 {
     public class ViewModel
     {
-           public List<Reptile> AllReptiles { get; set; }
-            public List<Mating> AllMatings { get; set; }
+           public IEnumerable<Reptile> Reptiles { get; set; }
+           public IEnumerable<Mating> Matings { get; set; }
+
+
         
     }
+
 }

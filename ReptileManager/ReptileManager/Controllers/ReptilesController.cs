@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using System.Data.Entity;
+
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,8 @@ using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System;
+using System.Collections;
+using Newtonsoft.Json;
 
 
 namespace ReptileManager.Controllers
@@ -20,6 +23,7 @@ namespace ReptileManager.Controllers
         // GET: Reptiles
         public ActionResult Index()
         {
+            
             return View(db.Reptiles.ToList());
         }
       
@@ -61,19 +65,38 @@ namespace ReptileManager.Controllers
         // GET: Reptiles/Details/5
         public async Task<ActionResult> Details(string id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewModel vm = new ViewModel();
 
-            Reptile reptile = await db.Reptiles.Include(r => r.Files).SingleOrDefaultAsync(r => r.ReptileId == id);
-            Mating mating = await db.Matings.Include(m => new { m.Date, m.Event }).SingleOrDefaultAsync(r => r.ReptileId == id);
+           
+            Reptile reptile = await db.Reptiles.Include(r => r.Files).Include(r=>r.Matings).FirstOrDefaultAsync(r => r.ReptileId == id);
+
+           // var d3query = await db.Matings.ToListAsync();
+           // string json = JsonConvert.SerializeObject(d3query);
+        
+           // Reptile rep = await db.Reptiles.FindAsync(id);
+
+           // Reptile mating = await db.Reptiles.Include(r => r.Matings).SingleOrDefaultAsync(r => r.ReptileId == id);
+     
+            //var join = from reptile in db.Reptiles join m in db.Matings on reptile.ReptileId equals m.ReptileId into g where reptile.ReptileId.Equals(id)select new{Mating = g.SelectMany(d =>d.Date,d =>d.Event))}
+
+          /* Mating mating = db.Reptiles.SelectMany(r => r.Matings)
+                        .Select(o => new
+                        {
+                            ReptileId = o.Reptile.ReptileId,
+                            Date = o.date,
+                            Event = o.Event
+                        });
+           */
+         //   ParentView parentView = new ParentView();
             
-            vm.AllMatings = mating;
-                
-             
-
+           
+        //   parentView.Reptiles = reptile;
+           //parentView.Matings = ;
+            
            // Mating mating = await db.Matings.Include(r => r.).Where(r => r.ReptileId == id);
             // return all mating details assocaited with this ID and pass them to the view
  
@@ -81,15 +104,14 @@ namespace ReptileManager.Controllers
 
           //  ViewData["mating"] = matingList;
 
-
-
-           
             if (reptile == null)
             {
                 return HttpNotFound();
             }
             return View(reptile);
         }
+
+       
 
         // GET: Reptiles/Create
       //  [Authorize(Roles = "canEdit")]
