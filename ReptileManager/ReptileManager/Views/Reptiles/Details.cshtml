@@ -4,8 +4,30 @@
 
 @{
     ViewBag.Title = "Details";
+    
 }
 <link href="@Url.Content("~/Content/DetailsPage.css")" rel="stylesheet" type="text/css" />
+
+<style>
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+
+</style>
 <h2>Details</h2>
 
 
@@ -501,16 +523,18 @@
             <div class="well" style="background-color: #fff">
                 <p style="font-size:18px;">Weight @DateTime.Now.Year</p>
                 <p>This chart shows the monthly weight for this reptile for the selected year.</p>
-                @*
-    <script type="text/javascript">
-    d3.json("", function(error, data) {
-        data.forEach(function(d) {
-            d.date = parseDate(d.date);
-            d.close = +d.close;
-        })
-    });
-        </script>
-                *@
+                @{
+                   
+                    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    var weightInfo = jss.Serialize(ViewBag.Json);
+                      }
+
+                 <script type="text/javascript">
+
+                     var userInfoJson = JSON.parse('@Html.Raw(weightInfo)')
+
+                 </script>
+                
             </div>
         </div>
     </div>

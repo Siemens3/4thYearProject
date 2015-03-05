@@ -80,8 +80,9 @@ namespace ReptileManager.Migrations
                      SpeciesNumber = "6",
                      FatherNotInDb = null,
                      MotherNotInDb =null,
-                     FeedInterval = 7,
-                     DueDate =  DateTime.Parse("2006-10-12"),
+                     FeedInterval = 1,
+                     TimeStamp = DateTime.UtcNow,
+                     DueDate =  DateTime.UtcNow,
                      TubeBoxNumber = "2",
                      Note = "Bee is very aggressive",
                      SalesCardComment = "Snake is easy to care for but needs someone with some experience." 
@@ -117,7 +118,8 @@ namespace ReptileManager.Migrations
                       FatherNotInDb = null,
                       MotherNotInDb = null,
                       FeedInterval = 7,
-                      DueDate = DateTime.Parse("2006-10-12"),
+                      TimeStamp = DateTime.UtcNow,
+                      DueDate = DateTime.UtcNow,
                       TubeBoxNumber = "4",
                       Note = "Paws is doing well.",
                       SalesCardComment = "beautiful snake, well tempered." 
@@ -153,7 +155,8 @@ namespace ReptileManager.Migrations
                       FatherNotInDb = null,
                       MotherNotInDb = null,
                       FeedInterval = 3,
-                     DueDate =  DateTime.Parse("2007-10-12"),
+                      TimeStamp = DateTime.UtcNow,
+                      DueDate =  DateTime.UtcNow,
                       TubeBoxNumber = "7",
                       Note="Give peanut a smaller amount of food.",
                       SalesCardComment ="none"

@@ -21,11 +21,40 @@ namespace ReptileManager.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Reptiles
-        public ActionResult Index()
+        public  ActionResult Index()
         {
-            
-            return View(db.Reptiles.ToList());
+            List<Double> interval = new List<Double>();
+            var reptile =  db.Reptiles.ToList();
+
+            foreach (Reptile inter in reptile)
+            {
+                interval.Add(inter.FeedInterval);
+            }
+
+            var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
+            ViewBag.Notification = sendNotification;
+
+            return  View(db.Reptiles.ToList());
         }
+     
+	/*	public async  Task<ActionResult> FeedingDate()
+        {
+        
+           List<Double> interval = new List<Double>();
+           var  reptile =  await db.Reptiles.ToListAsync();
+
+            foreach(Reptile inter in reptile)
+            {
+                interval.Add(inter.FeedInterval);
+            }
+
+           var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
+            return ViewBag.Notification = sendNotification;
+           
+           
+        } 
+	*/
+        
       
        public async Task<ActionResult> Images(string id)
        {
@@ -71,9 +100,26 @@ namespace ReptileManager.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-           
+           //code for reptile details,image and mating table
             Reptile reptile = await db.Reptiles.Include(r => r.Files).Include(r=>r.Matings).FirstOrDefaultAsync(r => r.ReptileId == id);
 
+            //code for d3
+            var reptiles =  db.Reptiles.Select(r => new {Weight = r.Weights});
+
+         //   var mating = db.Reptiles.Select(r => new { Matings = r.Matings });
+            object[] weightArray = new object[2];
+            foreach(var data in reptiles)
+            {
+                var weightData = data.Weight;
+                foreach(var values in weightData)
+                {
+                    weightArray[0] = values.Weights;
+                    weightArray[1] = values.Date;
+                }
+            }
+            
+          //  string json = JsonConvert.SerializeObject(weightArray);
+            ViewBag.Json = weightArray;
            // var d3query = await db.Matings.ToListAsync();
            // string json = JsonConvert.SerializeObject(d3query);
         
@@ -126,7 +172,7 @@ namespace ReptileManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
      //   [Authorize(Roles = "canEdit")]
-        public async Task<ActionResult> Create([Bind(Include = "ReptileId,Gender,SpeciesName,ScientificName,CommonName,Born,Morph,Venomous,Weight,WeightProgress,Origin,Food,FeedingType,AdultSize,Habitat,Breeder,BreederEmail,Cities,ClutchID,ForSale,Price,NickName,LicenseNumber,ChipNumber,SpeciesNumber,FatherNotInDb,MotherNotInDb,FeedInterval,DueDate,TubeBoxNumber,Note,SalesCardComment")] Reptile reptile,HttpPostedFileBase upload)
+        public async Task<ActionResult> Create([Bind(Include = "ReptileId,Gender,SpeciesName,ScientificName,CommonName,Born,Morph,Venomous,Weight,WeightProgress,Origin,Food,FeedingType,AdultSize,Habitat,Breeder,BreederEmail,Cities,ClutchID,ForSale,Price,NickName,LicenseNumber,ChipNumber,SpeciesNumber,FatherNotInDb,MotherNotInDb,FeedInterval,TimeStamp,DueDate,TubeBoxNumber,Note,SalesCardComment")] Reptile reptile, HttpPostedFileBase upload)
         {
             try
             {
@@ -156,10 +202,10 @@ namespace ReptileManager.Controllers
                     var newQr = reptile.QrGen();
 
                     var byteContent = reptile.imageToByteArray(newQr);
-                    reptile.QRCode = byteContent; 
+                    reptile.QRCode = byteContent;
 
-                   
-                  
+
+                    reptile.TimeStamp = DateTime.Today.ToLocalTime();
                     
                     db.Reptiles.Add(reptile);
                     await db.SaveChangesAsync();
@@ -184,7 +230,7 @@ namespace ReptileManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reptile reptile = await  db.Reptiles.Include(r => r.Files).SingleOrDefaultAsync(r => r.ReptileId == id);
+            Reptile reptile = await db.Reptiles.Include(r => r.Files).SingleOrDefaultAsync(r => r.ReptileId == id);
             if (reptile == null)
             {
                 return HttpNotFound();
@@ -536,6 +582,7 @@ namespace ReptileManager.Controllers
                    return HttpNotFound();
                }
                feed.ReptileId = reptile.ReptileId;
+               feed.Date = DateTime.Today.ToLocalTime();
                return View(feed);
            }
 
@@ -553,6 +600,11 @@ namespace ReptileManager.Controllers
                 * */
                if (ModelState.IsValid)
                {
+                  Reptile updateTimeStamp =  await db.Reptiles.FirstOrDefaultAsync(r => r.ReptileId == feeding.ReptileId);
+                   updateTimeStamp.TimeStamp = feeding.Date.ToLocalTime();
+                   db.Reptiles.Attach(updateTimeStamp);
+                   db.Entry(updateTimeStamp).Property(r => r.TimeStamp).IsModified = true;
+
                    db.Feedings.Add(feeding);
                    await db.SaveChangesAsync();
                    return RedirectToAction("Index");

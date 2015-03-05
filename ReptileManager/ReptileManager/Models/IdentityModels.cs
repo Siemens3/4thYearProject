@@ -59,7 +59,7 @@ namespace ReptileManager.Models
         public System.Data.Entity.DbSet<ReptileManager.Models.Length> Lengths { get; set; }
 
         public System.Data.Entity.DbSet<ReptileManager.Models.File> Files { get; set; }
-
+        
 
     }
 }

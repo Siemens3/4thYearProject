@@ -4,11 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Web;
 
 
 // http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files // image tutorial 
@@ -186,6 +182,10 @@ namespace ReptileManager.Models
         // image     public MotherImage {get; set;}
         //drop down list again      public String Rack {get; set;}
        public int FeedInterval { get; set; }
+
+       [Column(TypeName = "datetime2")]
+       public DateTime TimeStamp { get; set; }
+      
         public DateTime DueDate { get; set; }
        public String TubeBoxNumber { get; set; }
         public String Note { get; set; }
@@ -213,6 +213,12 @@ namespace ReptileManager.Models
 
          public virtual ICollection<Length> Lengths { get; set; }
 
+        public Reptile()
+        {
+            TimeStamp = DateTime.UtcNow;
+        }
+     
+         
 
         public Image QrGen()
           {
@@ -394,7 +400,14 @@ namespace ReptileManager.Models
      
       public class Feeding
       {
+          public Feeding()
+          {
+              Date = DateTime.UtcNow;
+          }
+         
           public int FeedingId { get; set; }
+
+          [Column(TypeName = "datetime2")]
           public DateTime Date { get; set; }
           [Display(Name="Food Type")]
           public FeedingType Feedings { get; set; }
@@ -407,6 +420,7 @@ namespace ReptileManager.Models
 
           public virtual Reptile Reptile { get; set; }
       }
+    
     
       public class BreedingCycle
       {
