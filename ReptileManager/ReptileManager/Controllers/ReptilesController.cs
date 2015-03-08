@@ -23,16 +23,42 @@ namespace ReptileManager.Controllers
         // GET: Reptiles
         public  ActionResult Index()
         {
-            List<Double> interval = new List<Double>();
+          /* 
+            List<DateTime> times = new List<DateTime>();
             var reptile =  db.Reptiles.ToList();
 
             foreach (Reptile inter in reptile)
             {
-                interval.Add(inter.FeedInterval);
+              times.Add(inter.TimeStamp.AddDays(inter.FeedInterval));
             }
+            var allTimes = times.GetEnumerator();
+           
+          
+            while(allTimes.MoveNext() != false)
+            {
+               if(allTimes.Current <= DateTime.Now.ToLocalTime())
+               {
 
-            var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
-            ViewBag.Notification = sendNotification;
+                   ViewBag.Notification = "F";
+
+               }
+               else
+               {
+                   ViewBag.Notification = "Test";
+               }
+            }
+                */
+          //  var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
+          //  ViewBag.Notification = sendNotification;
+         /*   var repsFeed = db.Reptiles.All(r => r.DueForFeeding() == true);
+            if(repsFeed == true)
+            {
+                ViewBag.Notification = "F";
+            }
+            else
+            {
+                ViewBag.Notification = "Test";
+            }*/
 
             return  View(db.Reptiles.ToList());
         }

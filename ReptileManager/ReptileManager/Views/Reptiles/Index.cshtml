@@ -15,9 +15,10 @@
         <th>
         @Html.DisplayNameFor(model => model.ReptileId)
         </th>
-        @{
-            @ViewBag.Notification
-          }
+       <th>
+
+       </th>
+           
         <th>
             @Html.DisplayNameFor(model => model.Gender)
         </th>
@@ -119,6 +120,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.ReptileId)
         </td>
+        <td>
+            
+            @if (item.DueForFeeding())
+            {
+                <content>F</content>
+            }
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Gender)
         </td>

@@ -212,6 +212,11 @@ namespace ReptileManager.Models
         public virtual ICollection<Weight> Weights { get; set; }
 
          public virtual ICollection<Length> Lengths { get; set; }
+        public bool DueForFeeding() {
+
+            return TimeStamp.AddDays(FeedInterval) <= DateTime.UtcNow;
+            }
+
 
         public Reptile()
         {
