@@ -10,6 +10,7 @@ namespace ReptileManager
         {
            
             ConfigureAuth(app);
+            app.MapSignalR();
         }
     }
 }

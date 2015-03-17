@@ -23,67 +23,48 @@ namespace ReptileManager.Controllers
         // GET: Reptiles
         public  ActionResult Index()
         {
-          /* 
-            List<DateTime> times = new List<DateTime>();
-            var reptile =  db.Reptiles.ToList();
-
-            foreach (Reptile inter in reptile)
-            {
-              times.Add(inter.TimeStamp.AddDays(inter.FeedInterval));
-            }
-            var allTimes = times.GetEnumerator();
-           
-          
-            while(allTimes.MoveNext() != false)
-            {
-               if(allTimes.Current <= DateTime.Now.ToLocalTime())
-               {
-
-                   ViewBag.Notification = "F";
-
-               }
-               else
-               {
-                   ViewBag.Notification = "Test";
-               }
-            }
-                */
-          //  var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
-          //  ViewBag.Notification = sendNotification;
-         /*   var repsFeed = db.Reptiles.All(r => r.DueForFeeding() == true);
-            if(repsFeed == true)
-            {
-                ViewBag.Notification = "F";
-            }
-            else
-            {
-                ViewBag.Notification = "Test";
-            }*/
-
             return  View(db.Reptiles.ToList());
         }
-     
-	/*	public async  Task<ActionResult> FeedingDate()
-        {
         
-           List<Double> interval = new List<Double>();
-           var  reptile =  await db.Reptiles.ToListAsync();
-
-            foreach(Reptile inter in reptile)
+      /*  public async Task<ActionResult> HealthStatus(string id)
+        {
+            int HealthLevel = 0;
+            String ReptileType;
+            bool mating; // check if its mating
+            var latestWeight = db.Reptiles.FirstOrDefaultAsync(x => x.ReptileId.ToUpper() == id.ToUpper());//(x => x.Date).Take(10)); 
+            var latestFeeding
+            var latestLength
+            var latestDefication
+            for (int i = 20; i > latestWeight.Count;i--)
             {
-                interval.Add(inter.FeedInterval);
+                latestWeight.Add(Weight);
+            }
+           
+          
+
+            for(int i = 0; i < Feedings.Count;i++)
+            {
+
             }
 
-           var sendNotification = db.Reptiles.Any(r => r.TimeStamp.AddDays(interval.SingleOrDefault()) <= DateTime.Now.ToLocalTime());
-            return ViewBag.Notification = sendNotification;
-           
-           
-        } 
-	*/
+            List<String> SpeciesType = new List<string>();
+            SpeciesType.Add("Eublepharis macularius");
+          
+            foreach(string species in SpeciesType)
+            {
+                if(ScientificName.ToUpper() == species.ToUpper())
+                {
+                    ReptileType = species;
+                }
+            }
+            
+
+            return Reptile;
         
-      
-       public async Task<ActionResult> Images(string id)
-       {
+        }
+        */
+	    public async Task<ActionResult> Images(string id)
+         {
           
           ViewBag.Message = "Your Qr codes for this reptile";
           var QrCodeToRetrieve = await db.Reptiles.FindAsync(id);
@@ -627,7 +608,7 @@ namespace ReptileManager.Controllers
                if (ModelState.IsValid)
                {
                   Reptile updateTimeStamp =  await db.Reptiles.FirstOrDefaultAsync(r => r.ReptileId == feeding.ReptileId);
-                   updateTimeStamp.TimeStamp = feeding.Date.ToLocalTime();
+                   updateTimeStamp.TimeStamp = feeding.Date.ToUniversalTime();
                    db.Reptiles.Attach(updateTimeStamp);
                    db.Entry(updateTimeStamp).Property(r => r.TimeStamp).IsModified = true;
 
