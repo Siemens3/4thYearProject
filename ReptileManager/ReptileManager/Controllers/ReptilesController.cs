@@ -14,6 +14,8 @@ using System.Collections;
 using Newtonsoft.Json;
 
 
+
+
 namespace ReptileManager.Controllers
 {
     public class ReptilesController : Controller
@@ -26,43 +28,76 @@ namespace ReptileManager.Controllers
             return  View(db.Reptiles.ToList());
         }
         
-      /*  public async Task<ActionResult> HealthStatus(string id)
+       public ActionResult HealthStatus(string id)
         {
             int HealthLevel = 0;
             String ReptileType;
             bool mating; // check if its mating
-            var latestWeight = db.Reptiles.FirstOrDefaultAsync(x => x.ReptileId.ToUpper() == id.ToUpper());//(x => x.Date).Take(10)); 
-            var latestFeeding
-            var latestLength
-            var latestDefication
-            for (int i = 20; i > latestWeight.Count;i--)
-            {
-                latestWeight.Add(Weight);
-            }
-           
-          
+            var latestWeight =  db.Weights.Include(x => x.ReptileId.ToUpper() == id.ToUpper());
+           //danger weight list to be implemented
+            int DangerWeightLoss = 15;
+            int MinorWeightLoss = 5;
+           Uri uriLeoHelp = new Uri("http://www.geckosetc.com/htm/health.htm"); 
 
-            for(int i = 0; i < Feedings.Count;i++)
+            List<Weight> WeightList = new List<Weight>();
+          //  var latestFeeding;
+           // var latestLength;
+          //  var latestDefication;
+            foreach(var w in latestWeight)
             {
-
-            }
-
-            List<String> SpeciesType = new List<string>();
-            SpeciesType.Add("Eublepharis macularius");
-          
-            foreach(string species in SpeciesType)
-            {
-                if(ScientificName.ToUpper() == species.ToUpper())
-                {
-                    ReptileType = species;
-                }
+                WeightList.Add(w);
             }
             
 
-            return Reptile;
+            var LastFive = WeightList.OrderByDescending(x => x.Date).Take(5);
+          
+            for (int i = 0; i < LastFive.Count(); i++)
+            {
+                if(LastFive.Last().Weights > WeightList.First().Weights)
+                {
+                    var weightLoss = WeightList.First().Weights - LastFive.Last().Weights;
+                    if(weightLoss >= DangerWeightLoss )
+                    {
+                        HealthLevel += 2;
+                        ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This is very seriours. Help:"+uriLeoHelp.ToString();
+                    
+                     }
+                    else if(weightLoss < MinorWeightLoss)
+                    {
+                        HealthLevel += 1;
+                        ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This reptile requires attention. Help:"+uriLeoHelp.ToString();
+                    }
+                    else if(LastFive.Last().Weights < WeightList.First().Weights)
+                    {
+                        LastFive.Select(x=>x.Weights).Skip(1);
+
+                    }
+                    else
+                    {
+                        HealthLevel += 0;
+                    }
+            }
+
+
+
+
+
+                //   List<String> SpeciesType = new List<string>();
+                //   SpeciesType.Add("Eublepharis macularius");
+
+                //    foreach(string species in SpeciesType)
+                //    {
+                //        if(ScientificName.ToUpper() == species.ToUpper())
+                //        {
+                //            ReptileType = species;
+                //        }
+                //      }
+
+
+                return View(latestWeight);
         
         }
-        */
+        
 	    public async Task<ActionResult> Images(string id)
          {
           
