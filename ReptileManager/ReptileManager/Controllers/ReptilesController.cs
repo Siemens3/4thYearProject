@@ -28,55 +28,72 @@ namespace ReptileManager.Controllers
             return  View(db.Reptiles.ToList());
         }
         
-       public ActionResult HealthStatus(string id)
+       public async Task<ActionResult> HealthStatus(string id)
         {
-            int HealthLevel = 0;
-            String ReptileType;
-            bool mating; // check if its mating
-            var latestWeight =  db.Weights.Include(x => x.ReptileId.ToUpper() == id.ToUpper());
+            int HealthStatus = 0;
+            var ReptileType = await db.Reptiles.FirstOrDefaultAsync(x=>x.ReptileId == id);
+           
+           
+            var latestWeight =  db.Weights.Include(x => x.ReptileId == id);
+           //  var latestFeeding;
+            var latestLength = db.Lengths.Include(l =>l.ReptileId == id);
+            var latestDefication = db.Defications.Include(d=>d.ReptileId == id);
+
            //danger weight list to be implemented
             int DangerWeightLoss = 15;
             int MinorWeightLoss = 5;
+
            Uri uriLeoHelp = new Uri("http://www.geckosetc.com/htm/health.htm"); 
 
             List<Weight> WeightList = new List<Weight>();
-          //  var latestFeeding;
-           // var latestLength;
-          //  var latestDefication;
+            List<Length> LengthList = new List<Length>();
+            List<Defication> DeficationList = new List<Defication>();
+
             foreach(var w in latestWeight)
             {
                 WeightList.Add(w);
             }
-            
+            foreach(var l in latestLength)
+            {
+                 LengthList.Add(l);
+            }
 
             var LastFive = WeightList.OrderByDescending(x => x.Date).Take(5);
           
             for (int i = 0; i < LastFive.Count(); i++)
             {
-                if(LastFive.Last().Weights > WeightList.First().Weights)
+                if(ReptileType.Born < ReptileType.Born.AddDays(30))
                 {
-                    var weightLoss = WeightList.First().Weights - LastFive.Last().Weights;
-                    if(weightLoss >= DangerWeightLoss )
+                    break;
+                }
+                else
+                {
+                    if(ReptileType.Born > ReptileType.Born.AddDays(30) && ReptileType.Born <  ReptileType.Born.AddDays(60))
                     {
-                        HealthLevel += 2;
-                        ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This is very seriours. Help:"+uriLeoHelp.ToString();
-                    
-                     }
-                    else if(weightLoss < MinorWeightLoss)
-                    {
-                        HealthLevel += 1;
-                        ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This reptile requires attention. Help:"+uriLeoHelp.ToString();
-                    }
-                    else if(LastFive.Last().Weights < WeightList.First().Weights)
-                    {
-                        LastFive.Select(x=>x.Weights).Skip(1);
 
                     }
-                    else
-                    {
-                        HealthLevel += 0;
+                        if(LastFive.Last().Weights > WeightList.First().Weights)
+                        {
+                            var weightLoss = WeightList.First().Weights - LastFive.Last().Weights;
+                            if(weightLoss >= DangerWeightLoss )
+                            {
+                                HealthStatus += 2;
+                                ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This is very seriours. Help:"+uriLeoHelp.ToString();
+                    
+                             }
+                            else if(weightLoss < MinorWeightLoss)
+                            {
+                                HealthStatus += 1;
+                                ViewBag.WeightLossMessage = "ID:"+id+" has lost "+weightLoss+". This reptile requires attention. Help:"+uriLeoHelp.ToString();
+                            }
+                            else if(LastFive.Last().Weights < WeightList.First().Weights)
+                            {
+                                LastFive.Select(x=>x.Weights).Skip(1);
+
+                            }
+                    
                     }
-            }
+                }
 
 
 
