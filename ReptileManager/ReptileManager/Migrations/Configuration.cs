@@ -7,6 +7,7 @@ namespace ReptileManager.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using ReptileManager.Models;
+    using System.Collections.Generic;
     // http://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-web-app-with-email-confirmation-and-password-reset link for add password reset
     internal sealed class Configuration : DbMigrationsConfiguration<ReptileManager.Models.ApplicationDbContext>
     {
@@ -49,8 +50,10 @@ namespace ReptileManager.Migrations
             //    );
             //
         //    AddUserAndRole(context);
-            context.Reptiles.AddOrUpdate(r => r.ReptileId,
-                 new Reptile
+         
+           var reptiles = new List<Reptile>
+           {
+                new Reptile
                  {
                      ReptileId = "1",
                      QRCode = null,
@@ -58,10 +61,9 @@ namespace ReptileManager.Migrations
                      SpeciesName = "Serpentes",
                      ScientificName = "Python regius ",
                      CommonName = "Royal Python",
-                     Born = new DateTime(2012, 3, 20),
+                     Born =  DateTime.Parse("2012, 3, 20"),
                      Morph = "Spider",
                      Venomous = false,
-                     
                      Weight = 15,
                      WeightProgress=WeightProgress.PlusWeight,Origin = "Africa",
                      Food = "Rat",
@@ -81,8 +83,8 @@ namespace ReptileManager.Migrations
                      FatherNotInDb = null,
                      MotherNotInDb =null,
                      FeedInterval = 1,
-                     TimeStamp = new DateTime(2015,3,27),
-                     DueDate =  new DateTime(2015,3,25),
+                     TimeStamp = DateTime.Parse("2015, 3, 27"),
+                     DueDate = DateTime.Parse("2015, 3, 25"),
                      TubeBoxNumber = "2",
                      Note = "Bee is very aggressive",
                      SalesCardComment = "Snake is easy to care for but needs someone with some experience." 
@@ -95,7 +97,7 @@ namespace ReptileManager.Migrations
                      SpeciesName = "Serpentes",
                      ScientificName = "Python regius ",
                      CommonName = "Royal Python",
-                     Born = new DateTime(2015, 1, 27),
+                     Born = DateTime.Parse("2015, 1, 27"),
                      Morph = "Normal",
                      Venomous = false ,
                       Weight = 15,
@@ -118,8 +120,8 @@ namespace ReptileManager.Migrations
                       FatherNotInDb = null,
                       MotherNotInDb = null,
                       FeedInterval = 7,
-                     TimeStamp = new DateTime(2015, 3, 17),
-                     DueDate = new DateTime(2015, 3, 14),
+                     TimeStamp = DateTime.Parse("2015, 3, 17"),
+                     DueDate = DateTime.Parse("2015, 3, 14"),
                       TubeBoxNumber = "4",
                       Note = "Paws is doing well.",
                       SalesCardComment = "beautiful snake, well tempered." 
@@ -132,7 +134,7 @@ namespace ReptileManager.Migrations
                      SpeciesName = "Lacertilia",
                      ScientificName = "Eublepharis macularius",
                      CommonName = "Leopard Gecko",
-                     Born = new DateTime(2014,11,27),
+                     Born = DateTime.Parse("2013, 11, 27"),
                      Morph = "Hypo",
                      Venomous = false ,
                       Weight = 15,
@@ -155,14 +157,146 @@ namespace ReptileManager.Migrations
                       FatherNotInDb = null,
                       MotherNotInDb = null,
                       FeedInterval = 3,
-                      TimeStamp = new DateTime(2015, 3, 15),
-                      DueDate = new DateTime(2015, 3, 10),
+                     TimeStamp = DateTime.Parse("2015, 3, 15"),
+                     DueDate = DateTime.Parse("2015, 3, 10"),
                       TubeBoxNumber = "7",
                       Note="Give peanut a smaller amount of food.",
                       SalesCardComment ="none"
                       
                  }
-               );
+           };
+            reptiles.ForEach(x => context.Reptiles.AddOrUpdate(r => r.ReptileId,x));
+            context.SaveChanges();
+
+            var length = new List<Length>
+            {
+                new Length{Lengths = 6, Date = DateTime.Parse("2015,3,10"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Length{Lengths = 5,Date = DateTime.Parse("2015,3,25"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                     new Length{Lengths=8,Date = DateTime.Parse("2015,3,30"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+             };
+            foreach (Length l in length)
+            {
+                var lengthInDateBase = context.Lengths.Where(
+                    r => r.Reptile.ReptileId == l.ReptileId).FirstOrDefault();
+                if (lengthInDateBase == null)
+                {
+                    context.Lengths.Add(l);
+                }
+            }
+            context.SaveChanges();
+
+            var feeding = new List<Feeding>
+            {
+                new Feeding{Date = DateTime.Parse("2015,3,10"),Feedings = FeedingType.RatFrozen,
+                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Feeding{Date = DateTime.Parse("2015,3,25"),Feedings = FeedingType.RatFrozen,
+                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                     new Feeding{Date = DateTime.Parse("2015,3,30"),Feedings = FeedingType.Mealworms,
+                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+             };
+            foreach (Feeding f in feeding)
+            {
+                var feedInDateBase = context.Feedings.Where(
+                    r => r.Reptile.ReptileId == f.ReptileId).FirstOrDefault();
+                if (feedInDateBase == null)
+                {
+                    context.Feedings.Add(f);
+                }
+            }
+            context.SaveChanges();
+
+            var defication = new List<Defication>
+            {
+                new Defication{Date = DateTime.Parse("2015,3,10"),Defications= "Normal",Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                     new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+             };
+            foreach (Defication d in defication)
+            {
+                var defInDateBase = context.Defications.Where(
+                    r => r.Reptile.ReptileId == d.ReptileId).FirstOrDefault();
+                if (defInDateBase == null)
+                {
+                    context.Defications.Add(d);
+                }
+            }
+            context.SaveChanges();
+
+            var shedsList = new List<Shed>
+            {
+                new Shed{Date = DateTime.Parse("2015,3,31"),Sheds = ShedType.Preshed,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Shed{Date = DateTime.Parse("2015,3,31"),Sheds = ShedType.Badshed,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                     new Shed{Date = DateTime.Parse("2015,3,31"),Sheds = ShedType.Shedout,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+             };
+            foreach (Shed s in shedsList)
+            {
+                var shedInDateBase = context.Sheds.Where(
+                    r => r.Reptile.ReptileId == s.ReptileId).FirstOrDefault();
+                if (shedInDateBase == null)
+                {
+                    context.Sheds.Add(s);
+                }
+            }
+            context.SaveChanges();
+           
+            var weights = new List<Weight>
+            {
+                new Weight{Weights = 50, Date = DateTime.Parse("2015,1,5"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Weight{Weights = 45, Date = DateTime.Parse("2015,1,15"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Weight{Weights = 35, Date = DateTime.Parse("2015,1,29"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Weight{Weights = 25, Date = DateTime.Parse("2015,2,10"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+                    new Weight{Weights = 20, Date = DateTime.Parse("2015,2,25"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
+
+                    new Weight{Weights = 50, Date = DateTime.Parse("2015,1,5"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                    new Weight{Weights = 60, Date = DateTime.Parse("2015,1,15"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                    new Weight{Weights = 70, Date = DateTime.Parse("2015,1,29"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                    new Weight{Weights = 65, Date = DateTime.Parse("2015,2,10"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                    new Weight{Weights = 85, Date = DateTime.Parse("2015,2,25"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+
+                    new Weight{Weights = 50, Date = DateTime.Parse("2015,1,5"),
+                    ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+                     new Weight{Weights = 52, Date = DateTime.Parse("2015,1,15"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+                    new Weight{Weights = 62, Date = DateTime.Parse("2015,1,25"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+                    new Weight{Weights = 70, Date = DateTime.Parse("2015,2,10"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+                    new Weight{Weights = 80, Date = DateTime.Parse("2015,2,25"),
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
+
+            };
+            foreach(Weight w in weights)
+            {
+                var weightInDateBase = context.Weights.Where(
+                    r => r.Reptile.ReptileId == w.ReptileId).FirstOrDefault();
+                if(weightInDateBase == null)
+                {
+                    context.Weights.Add(w);
+                }
+            }
+            context.SaveChanges();
 
         }
     }

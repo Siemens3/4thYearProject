@@ -150,8 +150,8 @@ namespace ReptileManager.Models
         public String ScientificName { get; set; }
         public String CommonName { get; set; }
 
-        [Column(TypeName = "datetime2")]
-        public DateTime Born { get; set; }
+       [Column(TypeName = "datetime2")]
+        public DateTime? Born { get; set; }
         public String Morph { get; set; }
         public Boolean Venomous { get; set; }
 

@@ -16,7 +16,7 @@ namespace ReptileManager.Migrations
                         SpeciesName = c.String(),
                         ScientificName = c.String(),
                         CommonName = c.String(),
-                        Born = c.String(),
+                        Born = c.DateTime(),
                         Morph = c.String(),
                         Venomous = c.Boolean(nullable: false),
                         Weight = c.Double(nullable: false),
