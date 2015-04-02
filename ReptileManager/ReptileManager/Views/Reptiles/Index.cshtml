@@ -16,7 +16,7 @@
         @Html.DisplayNameFor(model => model.ReptileId)
         </th>
        <th>
-
+          
        </th>
            
         <th>
@@ -117,8 +117,17 @@
              
 @foreach (var item in Model)
 {
-    <tr>
+    <tr> 
+
+        <td class="newColour">
+            @Html.Action("HealthStatusIndex", new { id = item.ReptileId })
+        </td>
         <td>
+         
+         
+             
+              
+
           @{ DateTime today = DateTime.Today;
            int age = today.Year - item.Born.Value.Year;
            if (item.Born > today.AddYears(-age))
@@ -236,6 +245,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.ReptileId }) |
             @Html.ActionLink("Details", "Details", new { id = item.ReptileId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ReptileId })
+
             @Html.ActionLink("HealthStatus","HealthStatus", new { id = item.ReptileId })
         </td>
     </tr>

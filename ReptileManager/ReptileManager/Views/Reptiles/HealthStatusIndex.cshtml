@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "HealthStatusIndex";
+}
+
+@{
+
+    int num = ViewBag.Health;
+
+    if (num.Equals(0))
+    {
+        <content>@num</content>
+       <style>
+         td.newColour {
+               background-color:green
+           }
+       </style>
+    }
+    else if (num >= 1 || num <= 2)
+    {
+        <content>@num</content>
+        <style>
+            td.newColour {
+                background-color: lightyellow;
+            }
+        </style>
+    }
+    else if (num  <= 4)
+    {
+        <content>@num</content>
+        <style>
+          td.newColour {
+                background-color: yellow;
+            }
+        </style>
+    }
+    else if (num == 6)
+    {
+        <content>@num</content>
+        <style>
+           td.newColour {
+                background-color: darkorange;
+            }
+        </style>
+    }
+    else if (num == 8)
+    {
+        <content>@num</content>
+        <style>
+           td.newColour {
+                background-color: red;
+            }
+        </style>
+    }
+    else if (num == 10)
+    {
+        <content>@num</content>
+        <style>
+            td.newColour {
+                background-color: black;
+            }
+        </style>
+    }
+
+
+}
+
+

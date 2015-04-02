@@ -400,6 +400,7 @@
     <Content Include="Views\Reptiles\BreedingCycle.cshtml" />
     <Content Include="Views\Reptiles\Images.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\Reptiles\HealthStatusIndex.cshtml" />
     <Content Include="Views\Reptiles\HealthStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>

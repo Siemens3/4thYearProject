@@ -522,25 +522,10 @@
         <p style="font-size:18px">Health Status</p>
         <div class="well" style="background-color: #fff">
             <p style="font-size:18px;"></p>
-   @{  
-     
-        
-            @ViewBag.Test
-            @ViewBag.WeightLossMessage
-            @ViewBag.JustGaveBirth
-            @ViewBag.ShedWarning
-            @ViewBag.DeficationMessage
-            @ViewBag.LengthIssue
-       
-       
-      } 
-                             
-           
-
-
-
             
-             </div>
+                @Html.Action("HealthStatus", new { id = Model.ReptileId })
+            
+          </div>
     </div>
 
     <br />
