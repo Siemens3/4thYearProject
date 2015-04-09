@@ -8,6 +8,11 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DotNet.Highcharts;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
+using DotNet.Highcharts.Enums;
+using System.Drawing;
 
 
 
@@ -24,15 +29,188 @@ namespace ReptileManager.Controllers
         {
             return  View(db.Reptiles.ToList());
         }
-        
+       
+        public ActionResult Chart(String id)
+        {
+            var reptileType = db.Reptiles.FirstOrDefault(r => r.ReptileId == id);
+            var weights = (from w in db.Weights where w.ReptileId == id select w.Weights);
+            var feedings = (from f in db.Feedings where f.ReptileId == id select f.NumItemsFed);
+            var lengths = (from l in db.Lengths where l.ReptileId == id select l.Lengths);
+
+           Object[] AvgForSpecies =  new Object[12];
+          
+           if( reptileType.ScientificName.Equals("Python regius"))
+           {
+              
+               Object[] PythonArray = new Object[12];
+               PythonArray[0] = 61.73;
+               PythonArray[1] = 82.20;
+               PythonArray[2] = 146.47;
+               PythonArray[3] = 230.33;
+               PythonArray[4] = 288.20;
+               PythonArray[5] = 346.40;
+               PythonArray[6] = 377.87;
+               PythonArray[7] = 406.20;
+               PythonArray[8] = 445.20;
+               PythonArray[9] = 476.73;
+               PythonArray[10] = 506.27;
+               PythonArray[11] = 546;
+
+               AvgForSpecies = PythonArray;
+
+           }
+           else if (reptileType.ScientificName.Equals("Eublepharis macularius"))
+           {
+             
+               Object[] LeopardArray = new Object[12];
+               LeopardArray[0] = 2;
+               LeopardArray[1] = 4;
+               LeopardArray[2] = 5.5;
+               LeopardArray[3] = 7.23;
+               LeopardArray[4] = 9;
+               LeopardArray[5] = 12.43;
+               LeopardArray[6] = 15.98;
+               LeopardArray[7] = 17;
+               LeopardArray[8] = 18.96;
+               LeopardArray[9] = 24;
+               LeopardArray[10] = 30;
+               LeopardArray[11] = 37;
+
+               AvgForSpecies = LeopardArray;
+
+           }
+            List<int> WeightAmount = new List<int>();
+            List<int> FeedingsAmount = new List<int>();
+            List<Double> LengthsAmount = new List<Double>();
+
+            foreach (var w in weights)
+            {
+                WeightAmount.Add(w);
+            }
+            foreach (var f in feedings)
+            {
+                FeedingsAmount.Add(f);
+            }
+            foreach (var l in lengths)
+            {
+                LengthsAmount.Add(l);
+            }
+
+            WeightAmount.ToArray();
+            object[] newWeightsObj;
+            newWeightsObj = WeightAmount.Cast<object>().ToArray();
+
+            FeedingsAmount.ToArray();
+            object[] newFeedingsObj;
+            newFeedingsObj = FeedingsAmount.Cast<object>().ToArray();
+
+            LengthsAmount.ToArray();
+            object[] newLengthsObj;
+            newLengthsObj = LengthsAmount.Cast<object>().ToArray();
+
+            Highcharts g2 = new Highcharts("chart2")
+               .InitChart(new Chart { Type = ChartTypes.Column })
+               .SetTitle(new Title { Text = "Feedings" })
+               .SetXAxis(new XAxis { Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" } })
+               .SetYAxis(new YAxis
+               {
+                   Min = 0,
+                   Title = new YAxisTitle { Text = "grams" }
+               })
+               .SetLegend(new Legend
+               {
+                   Layout = Layouts.Vertical,
+                   Align = HorizontalAligns.Center,
+                   VerticalAlign = VerticalAligns.Bottom,
+                   X = 125,
+                   Y = 70,
+                   Floating = true,
+                   BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF")),
+                   Shadow = true
+               })
+               .SetTooltip(new Tooltip { Formatter = @"function() { return ''+ this.x +': '+ this.y +' grams'; }" })
+               .SetPlotOptions(new PlotOptions
+               {
+                   Column = new PlotOptionsColumn
+                   {
+                       PointPadding = 0.2,
+                       BorderWidth = 0
+                   }
+               })
+               .SetSeries(new[]
+                {
+                    new Series { Name = "Feedings", Data = new Data(newFeedingsObj) },
+                    new Series { Name = "Weight", Data = new Data(newWeightsObj)},
+                    new Series {Name = "Average", Data = new Data(AvgForSpecies)}
+                });
+          
+            Highcharts g1 = new Highcharts("chart1")
+                 .InitChart(new Chart { Type = ChartTypes.Areaspline })
+                 .SetTitle(new Title { Text = "Weights for each month " })
+                 .SetLegend(new Legend
+                 {
+                     Layout = Layouts.Vertical,
+                     Align = HorizontalAligns.Center,
+                     VerticalAlign = VerticalAligns.Bottom,
+                     Floating = true,
+                     BorderWidth = 1,
+                     BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF"))
+                 })
+
+               .SetXAxis(new XAxis
+               {
+                   Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
+                   Title = new XAxisTitle { Text = "Months" }
+               })
+                .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Weight units" } })
+                .SetSeries(new[]
+                {
+                    new Series {  Name = "Weights", Data = new Data(newWeightsObj)},
+                    new Series {   Name = "Average", Data = new Data(AvgForSpecies)},
+                   
+               });
+
+            Highcharts g3 = new Highcharts("chart3")
+               .InitChart(new Chart { Type = ChartTypes.Areaspline })
+               .SetTitle(new Title { Text = "Length for each month " })
+               .SetLegend(new Legend
+               {
+                   Layout = Layouts.Vertical,
+                   Align = HorizontalAligns.Left,
+                   VerticalAlign = VerticalAligns.Top,
+                   Floating = true,
+                   BorderWidth = 1,
+                   BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF"))
+               })
+
+             .SetXAxis(new XAxis
+             {
+                 Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
+                 Title = new XAxisTitle { Text = "Months" }
+             })
+              .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Length units in inches" } })
+              .SetSeries(new Series
+              {
+                  Name = "Lengths",
+                  Data = new Data(newLengthsObj)
+
+              });
+           
+            Charts model = new Charts();
+            model.Chart1 = g1;
+            model.Chart2 = g2;
+            model.Chart3 = g3;
+           return PartialView(model);
+
+        }
             
-        public ActionResult HealthStatusIndex(String id)
+        public String HealthStatusIndex(String id)
         {
             int HealthStatus = 0;
             var ReptileType = db.Reptiles.FirstOrDefault(x => x.ReptileId == id);
 
             var latestWeight = db.Weights.OrderByDescending(w => w.Date).Where(r => r.ReptileId == id);
-
+            
 
             var latestFeeding = db.Feedings.FirstOrDefault(f => f.ReptileId == id);
             var latestLength = db.Lengths.FirstOrDefault(l => l.ReptileId == id);
@@ -264,9 +442,35 @@ namespace ReptileManager.Controllers
 
                 }
             }
+            var colour = "";
+
+            if (HealthStatus == 0)
+                 {
+                     colour = "#7EBF7E";
+                 }
+            else if (HealthStatus >= 1 || HealthStatus <= 2)
+                  {
+                      colour = "#FFFF66";
+            }
+          else if (HealthStatus  <= 4)
+                 {
+                     colour = "#FFCC00";
+            }
+            else if (HealthStatus == 6)
+        {
+            colour = "#FF9900";
+          }
+        else if (HealthStatus == 8)
+        {
+            colour = "#FF0000";
+           }
+            else if (HealthStatus == 10)
+            {
+
+                colour = "#000000";
+              }
             ViewBag.Health = HealthStatus;
-           
-            return PartialView();
+            return colour;
         }
        
         // cannot be async :( 
@@ -511,7 +715,7 @@ namespace ReptileManager.Controllers
                  }
              }
              ViewBag.Health = HealthStatus;
-            return View();
+            return PartialView();
          }
         
 	    public async Task<ActionResult> Images(string id)

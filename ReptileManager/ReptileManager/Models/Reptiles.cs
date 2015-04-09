@@ -214,9 +214,37 @@ namespace ReptileManager.Models
         public virtual ICollection<Weight> Weights { get; set; }
 
          public virtual ICollection<Length> Lengths { get; set; }
-        public bool DueForFeeding() 
+        public String DueForFeeding() 
         {
-             return TimeStamp.AddDays(FeedInterval) <= DateTime.UtcNow;
+            string today = "Today";
+            string oneDayLate = "Late";
+            string twoDayLate = "VeryLate";
+            string noFeed = "";
+           
+
+            DateTime StartDate = TimeStamp.AddDays(FeedInterval);
+            DateTime Today = DateTime.UtcNow;
+            TimeSpan Deftimes = Today-StartDate;
+            double DiffDefInDays = Deftimes.Days;
+
+            if (DiffDefInDays == 1)
+            {
+                return oneDayLate;
+            }
+            // feed is  due 
+            else if (DiffDefInDays == 0)
+            {
+                return today;
+            }
+            // feed is over due by at least two day
+            else if (DiffDefInDays >= 2)
+            {
+                return twoDayLate;
+            }
+            else
+            {
+                return noFeed;
+            }
         }
 
 
@@ -421,7 +449,7 @@ namespace ReptileManager.Models
            [Display(Name = "Size")]
           public FoodSize FoodSize { get; set; }
            [Display(Name = "Amount")]
-          public Int16 NumItemsFed { get; set; }
+          public int NumItemsFed { get; set; }
           public String Notes { get; set; }
           public String ReptileId { get; set; }
 
@@ -472,7 +500,7 @@ namespace ReptileManager.Models
       {
           public int WeightId { get; set; }
           [Display(Name="Weight")]
-          public Int16 Weights { get; set; } // display in grams
+          public int Weights { get; set; } // display in grams
           public DateTime Date { get; set; }
           public String ReptileId { get; set; }
 
@@ -484,7 +512,7 @@ namespace ReptileManager.Models
           public int LengthId{get;set;}
 
           [Display(Name="Length")]
-          public Int16 Lengths { get; set; } // display in cm
+          public double Lengths { get; set; } // display in cm
           public DateTime Date { get; set; }
           public String ReptileId { get; set; }
 

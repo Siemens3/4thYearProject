@@ -8,7 +8,11 @@
 }
 <link href="@Url.Content("~/Content/DetailsPage.css")" rel="stylesheet" type="text/css" />
 
-<style>
+<script type="text/javascript" src="~/Scripts/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="~/Scripts/modernizr-2.8.3.js"></script>
+
+
+    <style>
 .axis path,
 .axis line {
   fill: none;
@@ -354,11 +358,11 @@
             {
                 <div class="row">
                     <div class="col-md-2">
-                      
-                          @Html.ActionLink("Edit", "Edit", new { id = item.ReptileId})
-                          @Html.ActionLink("Delete", "Delete", new { id = item.MatingId })
-                        </div>
-                   
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ReptileId })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MatingId })
+                    </div>
+
                     <div class="col-md-4">
                         @Html.DisplayFor(modelItem => item.Date)
                     </div>
@@ -370,185 +374,169 @@
 
 
         </div>
-        
 
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Notification", "Notification", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
 
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                       @Html.ActionLink("Other", "Other", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Medication", "Medication", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                      @Html.ActionLink("Shed", "Shed", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                       @Html.ActionLink("Cleaning", "Cleaning", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Feeding", "Feeding", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                       @Html.ActionLink("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Ultrasound", "Ultrasound", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                   @Html.ActionLink("Note", "Note", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Weight", "Weight", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="media-left">
-
-                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                        @Html.ActionLink("Length", "Length", new { id = Model.ReptileId })
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pull-right">
-
-                        <span class="glyphicon glyphicon-resize-full"></span>
-                    </div>
-                </div>
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Notification", "Notification", new { id = Model.ReptileId })
             </div>
-            <div class="details-list-separator"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Other", "Other", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Medication", "Medication", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Shed", "Shed", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Cleaning", "Cleaning", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Feeding", "Feeding", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("BreedingCycle", "BreedingCycle", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Ultrasound", "Ultrasound", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Note", "Note", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Weight", "Weight", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="media-left">
+
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                @Html.ActionLink("Length", "Length", new { id = Model.ReptileId })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="pull-right">
+
+                <span class="glyphicon glyphicon-resize-full"></span>
+            </div>
+        </div>
+    </div>
+    <div class="details-list-separator"></div>
     <br />
     <div class="well">
         <p style="font-size:18px">Health Status</p>
         <div class="well" style="background-color: #fff">
             <p style="font-size:18px;"></p>
-            
-                @Html.Action("HealthStatus", new { id = Model.ReptileId })
-            
-          </div>
+
+            @Html.Action("HealthStatus", new { id = Model.ReptileId })
+
+        </div>
     </div>
 
     <br />
-        <div class="well">
-            <p style="font-size:18px">Statistics</p>
-            <div class="well" style="background-color: #fff">
-                <p style="font-size:18px;">Weight @DateTime.Now.Year</p>
-                <p>This chart shows the monthly weight for this reptile for the selected year.</p>
-                @{
-                   
-                    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
-                    var weightInfo = jss.Serialize(ViewBag.Json);
-                      }
+        @Html.Action("Chart", new { item = Model.ReptileId })
+ </div>
 
-                 <script type="text/javascript">
 
-                     var userInfoJson = JSON.parse('@Html.Raw(weightInfo)')
-
-                 </script>
-                
-            </div>
-        </div>
-    </div>
 
 
     <br />
@@ -557,6 +545,6 @@
         @Html.ActionLink("Back to List", "Index")
     </p>
 
-   
-   
+    <script type="text/javascript" src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+
    
