@@ -214,36 +214,26 @@ namespace ReptileManager.Models
         public virtual ICollection<Weight> Weights { get; set; }
 
          public virtual ICollection<Length> Lengths { get; set; }
+
+       
         public String DueForFeeding() 
         {
-            string today = "Today";
-            string oneDayLate = "Late";
-            string twoDayLate = "VeryLate";
-            string noFeed = "";
-           
+          
+            var daysSinceLastUpdate = (DateTime.UtcNow - TimeStamp.AddDays(FeedInterval)).Days;
 
-            DateTime StartDate = TimeStamp.AddDays(FeedInterval);
-            DateTime Today = DateTime.UtcNow;
-            TimeSpan Deftimes = Today-StartDate;
-            double DiffDefInDays = Deftimes.Days;
+            if (daysSinceLastUpdate < 0)
+                return Status.Default;
+    
 
-            if (DiffDefInDays == 1)
+            switch (daysSinceLastUpdate)
             {
-                return oneDayLate;
-            }
-            // feed is  due 
-            else if (DiffDefInDays == 0)
-            {
-                return today;
-            }
-            // feed is over due by at least two day
-            else if (DiffDefInDays >= 2)
-            {
-                return twoDayLate;
-            }
-            else
-            {
-                return noFeed;
+              
+                case 0:
+                    return Status.Today;
+                case 1:
+                    return Status.OneDayLate;
+                default:
+                    return Status.TwoOrMoreDaysLate;
             }
         }
 
@@ -313,9 +303,15 @@ namespace ReptileManager.Models
          */
         
 
-    } 
-  
+    }
 
+    public static class Status
+    {
+        public const string Today = "Today";
+        public const string OneDayLate = "Late";
+        public const string TwoOrMoreDaysLate = "VeryLate";
+        public const string Default = "";
+    }
   public class File
   {
       public int FileId { get; set; }

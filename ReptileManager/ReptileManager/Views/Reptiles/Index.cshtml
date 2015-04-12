@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ReptileManager.Models.Reptile>
-
+@using ReptileManager.Models;
 @{
     ViewBag.Title = "Reptiles";
 }
@@ -160,7 +160,7 @@
             @Html.DisplayFor(modelItem => item.ReptileId)
         </td>
 <td>
-    @if (item.DueForFeeding().Equals("Today"))
+    @if (item.DueForFeeding() == ReptileManager.Models.Status.Today)
     {
 
         <content class="Green">F</content>
@@ -168,20 +168,20 @@
         // #009933 // green
 
     }
-    else if (item.DueForFeeding().Equals("Late"))
+    else if (item.DueForFeeding() == ReptileManager.Models.Status.OneDayLate)
     {
         // #FF6600 // orange
             <content class="Orange">F</content>
           
 
         }
-        else if (item.DueForFeeding().Equals("VeryLate"))
+        else if (item.DueForFeeding() == ReptileManager.Models.Status.TwoOrMoreDaysLate)
         {
             //   #FF0000// re
             <content class="Red">F</content>
            
         }
-        else if (item.DueForFeeding().Equals(""))
+        else if (item.DueForFeeding() == ReptileManager.Models.Status.Default)
         {
             <content></content>
             
