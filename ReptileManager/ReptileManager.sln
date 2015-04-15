@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\ReptileManager-WAWS-dev.json = PublishScripts\Configurations\ReptileManager-WAWS-dev.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthStatusTests", "HealthStatusTests\HealthStatusTests.csproj", "{0B721B0E-8F0D-4198-A4BE-DCEAB0B3B211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReptileManagerTests", "ReptileManagerTests\ReptileManagerTests.csproj", "{1EB3D01A-5FB5-4C7A-90B3-843B411E6453}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,14 @@ Global
 		{F4822E03-089D-46B8-AF7D-8D7811FC3A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4822E03-089D-46B8-AF7D-8D7811FC3A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4822E03-089D-46B8-AF7D-8D7811FC3A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B721B0E-8F0D-4198-A4BE-DCEAB0B3B211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B721B0E-8F0D-4198-A4BE-DCEAB0B3B211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B721B0E-8F0D-4198-A4BE-DCEAB0B3B211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B721B0E-8F0D-4198-A4BE-DCEAB0B3B211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB3D01A-5FB5-4C7A-90B3-843B411E6453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB3D01A-5FB5-4C7A-90B3-843B411E6453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB3D01A-5FB5-4C7A-90B3-843B411E6453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB3D01A-5FB5-4C7A-90B3-843B411E6453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
