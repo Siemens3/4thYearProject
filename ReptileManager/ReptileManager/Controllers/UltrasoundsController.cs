@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class UltrasoundsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Ultrasounds
         public ActionResult Index()

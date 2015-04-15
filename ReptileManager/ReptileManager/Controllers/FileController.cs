@@ -5,7 +5,7 @@ namespace ReptileManager.Controllers
 {
     public class FileController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
         //
         // GET: /File/
         public ActionResult Index(int id)

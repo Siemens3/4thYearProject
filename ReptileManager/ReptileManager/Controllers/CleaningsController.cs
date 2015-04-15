@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class CleaningsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Cleanings
         public ActionResult Index()

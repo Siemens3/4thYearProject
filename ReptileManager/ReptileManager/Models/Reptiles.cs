@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+
 
 
 // http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files // image tutorial 
@@ -98,8 +101,6 @@ namespace ReptileManager.Models
         Shedout,
         [Display(Name = "Bad shed")]
         Badshed
-
-
     }
     public enum FoodSize
     {
@@ -236,7 +237,7 @@ namespace ReptileManager.Models
                     return Status.TwoOrMoreDaysLate;
             }
         }
-
+       
 
         public Reptile()
         {
@@ -251,9 +252,6 @@ namespace ReptileManager.Models
               encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
               encoder.QRCodeScale = 3;
               Bitmap img = encoder.Encode(ReptileId);
-          //    ImageConverter converter = new ImageConverter();
-          //    QRCode = (byte[])converter.ConvertTo(img, typeof(byte[]));
-           //   Image newImg = (Image)img;
               return img;
               
           }
@@ -304,6 +302,11 @@ namespace ReptileManager.Models
         
 
     }
+
+
+
+
+
 
     public static class Status
     {

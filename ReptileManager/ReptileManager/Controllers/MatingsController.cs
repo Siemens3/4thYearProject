@@ -13,7 +13,7 @@ namespace ReptileManager.Controllers
     
     public class MatingsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Matings
         public ActionResult Index()

@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class BreedingCyclesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: BreedingCycles
         public ActionResult Index()

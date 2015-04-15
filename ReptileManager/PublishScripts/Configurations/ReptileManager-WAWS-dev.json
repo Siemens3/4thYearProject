@@ -7,7 +7,7 @@
         "databases": [
             {
                 "connectionStringName": "DefaultConnection",
-                "databaseName": "ReptileCare_db",
+                "databaseName": "ReptileManager_db",
                 "serverName": "",
                 "user": "dbstephen",
                 "password": "",

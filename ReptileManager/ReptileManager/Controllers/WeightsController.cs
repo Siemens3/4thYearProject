@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class WeightsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Weights
         public ActionResult Index()

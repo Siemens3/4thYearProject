@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class ShedsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Sheds
         public ActionResult Index()

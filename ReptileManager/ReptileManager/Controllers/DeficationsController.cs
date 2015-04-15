@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class DeficationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Defications
         public ActionResult Index()

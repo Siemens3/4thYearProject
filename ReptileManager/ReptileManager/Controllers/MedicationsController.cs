@@ -12,7 +12,7 @@ namespace ReptileManager.Controllers
 {
     public class MedicationsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Medications
         public ActionResult Index()

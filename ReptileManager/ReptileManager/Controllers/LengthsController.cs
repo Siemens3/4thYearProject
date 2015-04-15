@@ -13,7 +13,7 @@ namespace ReptileManager.Controllers
 {
     public class LengthsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ReptileContext db = new ReptileContext();
 
         // GET: Lengths
         public async Task<ActionResult> Index()
