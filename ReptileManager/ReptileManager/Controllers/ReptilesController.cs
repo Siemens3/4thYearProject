@@ -1,19 +1,19 @@
-﻿using ReptileManager.Models;
+﻿using DotNet.Highcharts;
+using DotNet.Highcharts.Enums;
+using DotNet.Highcharts.Helpers;
+using DotNet.Highcharts.Options;
+using ReptileManager.Models;
+using ReptileManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using DotNet.Highcharts;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Options;
-using DotNet.Highcharts.Enums;
-using System.Drawing;
-using ReptileManager.Services;
 
 
 
@@ -207,17 +207,16 @@ namespace ReptileManager.Controllers
             
         public String HealthStatusIndex(string id)
         {
-            var db = new ReptileContext();
-            var healthColour = new HealthStatus(db);
+           
+            var healthColour = new HealthStatus();
             return healthColour.GetHealth(id).Item1;
         }
        
         // cannot be async :( 
         public ActionResult HealthStatus(string id)
         {
-            var db = new ReptileContext();
-            var healthReport = new HealthStatus(db);
-            return PartialView(healthReport.GetHealth(id).Item2);
+             var healthReport = new HealthStatus();
+             return PartialView(healthReport.GetHealth(id).Item2);
         }
         
 	    public async Task<ActionResult> Images(string id)
