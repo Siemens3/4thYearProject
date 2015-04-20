@@ -6,6 +6,7 @@ using System.Web;
 
 namespace ReptileManager.Services
 {
+    
     public class HealthStatus
     {
         private ReptileContext db = new ReptileContext();
@@ -27,7 +28,8 @@ namespace ReptileManager.Services
                 var latestDefication = db.Defications.FirstOrDefault(d => d.ReptileId == id);
                 var latestShed = db.Sheds.FirstOrDefault(s => s.ReptileId == id);
 
-                List<Weight> WeightList = new List<Weight>();
+             
+               List<Weight> WeightList = new List<Weight>();
 
                 foreach (var w in latestWeight)
                 {
@@ -35,8 +37,6 @@ namespace ReptileManager.Services
                 }
 
                 //danger weight list to be implemented
-                int DangerWeightLoss = 15;
-                int MinorWeightLoss = 5;
                 bool DangerWeight = false;
                 bool MinorWeight = false;
                 var WeightLoss = 0;
@@ -71,231 +71,257 @@ namespace ReptileManager.Services
                 Uri UriLeoDeficationHelp_002 = new Uri("http://www.repticzone.com/forums/Geckos-Leopard/messages/177497.html");
                 Uri UriLeoDeficationHelp_003 = new Uri("https://www.youtube.com/watch?v=wvpcPS8k09c");
 
-
-
-
                 //weight check
                 String weightLossMessage;
                 var LastFiveWeights = WeightList.Take(5);
 
-                System.Diagnostics.Debug.WriteLine(LastFiveWeights.FirstOrDefault().Weights + "Hello-------------------1");
-                
                 DateTime born = ReptileType.Born.Value;
                 DateTime newDate = DateTime.UtcNow;
 
                 TimeSpan tsAge = newDate - born;
                 int age = tsAge.Days;
-                
 
-                for (int i = 0; i < LastFiveWeights.Count(); i++)
-                {
-                    if (age <= 30)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        // 1-2 months
-                        if (age > 30 & age < 60)
-                        {
-                            if (LastFiveWeights.FirstOrDefault().Weights < 2)
-                            {
-                                HealthStatus += 2;
-                                weightLossMessage = ReptileType.CommonName + " has not gained much weight, please follow these links on caring for young " + ReptileType.SpeciesName + ". " + "<br />" + UriBabyLeoHelp_001 + "<br />" + UriBabyLeoHelp_002;
-                                report.Add(weightLossMessage);
-                                break;
-                            }
-                        }
-                        // 3-6 months
-                        else if (age > 90 & age < 182)
-                        {
-                            if (WeightList.FirstOrDefault().Weights < 5)
-                            {
-                                HealthStatus += 2;
-                                weightLossMessage = ReptileType.NickName + " has not gained much weight, this is serious because of the age " + ReptileType.Born + " please follow these links on caring for young " + ReptileType.SpeciesName + ". " + "<br />" + UriJuvenileLeoHelp_001 + "<br />" + UriJuvenileLeoHelp_002;
-                                report.Add(weightLossMessage);
-                                break;
-                            }
-                        }
-                        // greater than 6 months
-                        else if (age > 182)
-                        {
-                            if (LastFiveWeights.ElementAt(i).Weights > LastFiveWeights.First().Weights)
-                            {
-                                WeightLoss = LastFiveWeights.Last().Weights - LastFiveWeights.First().Weights;
-
-                                System.Diagnostics.Debug.WriteLine(LastFiveWeights.Last().Weights+"Hello-----------"); // test to check order of list
-
-                                if (WeightLoss >= DangerWeightLoss)
-                                {
-                                    DangerWeight = true;
-                                    HealthStatus += 2;
-                                    weightLossMessage = "ID:" + id + " has lost " + WeightLoss + "grams. This is very seriours. Helpful links:" + UriLeoHelp_001.ToString();
-                                    report.Add(weightLossMessage);
-                                }
-                                else if (WeightLoss < MinorWeightLoss)
-                                {
-                                    MinorWeight = true;
-                                    HealthStatus += 1;
-                                    weightLossMessage = "ID:" + id + " has lost " + WeightLoss + "grams. This reptile requires attention. Helpful links:" + UriLeoHelp_001.ToString();
-                                    report.Add(weightLossMessage);
-                                }
-                            }
-                        }
-                    }
-                }
-                //breeding check
-                String justGaveBirth;
-                if (HealthStatus > 0)
-                {
-                    if (ReptileType.Gender == Gender.Female)
-                    {
-                        DateTime start = ReptileType.DueDate;
-                        TimeSpan ts = newDate - start;
-                        int differenceInDays = ts.Days;
-
-                        if (differenceInDays < 14)
-                        {
-                            if (DangerWeight == true)
-                            {
-                                HealthStatus += 2;
-                                justGaveBirth = "This reptile just gave birth in the last two week. This would explain the weight loss of " + WeightLoss + ". This is a serious amount of weight loss. Please reconsider breeding this reptile. Please read these links on caring for" + ReptileType.SpeciesName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
-                                report.Add(justGaveBirth);
-                            }
-                            else if (MinorWeight == true)
-                            {
-                                HealthStatus += 1;
-                                justGaveBirth = "This reptile just gave birth in the last two week. This would explain the weight loss of " + WeightLoss + ". This is a minor amount of weight loss. This would be normal. Please read these links on caring for" + ReptileType.SpeciesName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
-                                report.Add(justGaveBirth);
-                            }
-                        }
-                        else if (differenceInDays > 14 & differenceInDays < 28)
-                        {
-                            if (DangerWeight == true)
-                            {
-                                HealthStatus += 2;
-                                justGaveBirth = "This reptile recently gave birth in the last month. This would explain the weight loss of " + WeightLoss + ". This is a serious amount of weight loss. This would not be normal. Please read these links on caring for" + ReptileType.SpeciesName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
-                                report.Add(justGaveBirth);
-                            }
-                            else if (MinorWeight == true)
-                            {
-                                HealthStatus += 1;
-                                justGaveBirth = "This reptile recently gave birth in the last month. This would explain the weight loss of " + WeightLoss + ". This is a minor amount of weight loss. This would be normal. Consider seperating this reptile or a bigger diet to help gain weight. Please read these links on caring for" + ReptileType.SpeciesName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
-                                report.Add(justGaveBirth);
-                            }
-                        }
-                    }
-                }
-
-                //shed check
-                String shedWarning;
-                if (latestShed.Sheds == ShedType.Inshed || latestShed.Sheds == ShedType.Badshed || latestShed.Sheds == ShedType.Preshed)
-                {
-                    DateTime shedDate = latestShed.Date;
-                    TimeSpan ts = shedDate - newDate;
-                    int diffInDays = ts.Days;
-
-                    if (diffInDays > 7)
-                    {
-                        HealthStatus += 2;
-                        shedWarning = ReptileType.NickName + " is in " + latestShed.Sheds.ToString() + " for the past " + diffInDays + " days. This is not normal. Please read these links to help solve this issue." + "<br />" + UriLeoSheddingHelp_001 + "<br />" + UriLeoSheddingHelp_002 + "<br />" + UriLeoSheddingHelp_003 + "<br />" + UriLeoSheddingHelp_004;
-                        report.Add(shedWarning);
-                    }
-                    else if (diffInDays > 4 & diffInDays < 6)
-                    {
-                        HealthStatus += 1;
-                        shedWarning = ReptileType.NickName + "is in" + latestShed.Sheds.ToString() + " for the past " + diffInDays + " days. This is ok. Please read these links if this issue continues. " + "<br />" + UriLeoSheddingHelp_001 + "<br />" + UriLeoSheddingHelp_002 + "<br />" + UriLeoSheddingHelp_003 + "<br />" + UriLeoSheddingHelp_004;
-                        report.Add(shedWarning);
-                    }
-                }
-
-                //defication check
-                String deficationMessage;
-                DateTime defDate = latestDefication.Date;
-                DateTime feedingDate = latestFeeding.Date;
-                DateTime today = DateTime.Today;
-                TimeSpan Deftimes = defDate - today;
-                TimeSpan Feedtimes = feedingDate - today;
-                int DiffDefInDays = Deftimes.Days;
-                int diffInFeeding = Feedtimes.Days;
-                if (DiffDefInDays > 7)
-                {
-                    HealthStatus += 2;
-                    if (diffInFeeding > 5)
-                    {
-                        deficationMessage = ReptileType.NickName + " Has not passed soilds in " + DiffDefInDays + " days, this is a seriours condition for" + ReptileType.ScientificName + ". Althought the reptile has not feed in the past " + diffInFeeding + "days this could explain the issue.Consider bringing the reptile to the vet for checks.<br /> Helpful links <br />" + UriLeoDeficationHelp_001 + "<br />" + UriLeoDeficationHelp_002 + "<br />" + UriLeoDeficationHelp_003;
-                        report.Add(deficationMessage);
-                    }
-                    else
-                    {
-                        deficationMessage = ReptileType.NickName + " Has not passed soilds in " + DiffDefInDays + " days, this is a seriours condition for" + ReptileType.ScientificName + "Consider bringing the reptile to the vet for checks.<br /> Helpful links <br />" + UriLeoDeficationHelp_001 + "<br />" + UriLeoDeficationHelp_002 + "<br />" + UriLeoDeficationHelp_003;
-                        report.Add(deficationMessage);
-                    }
-
-                }
-                else if (DiffDefInDays > 2 & DiffDefInDays < 5)
-                {
-                    HealthStatus += 1;
-                    deficationMessage = ReptileType.NickName + " has not passed solids in " + DiffDefInDays + " days.This is not to serious but if this does not change consider bringing the reptile to the vet. Helpful links <br />" + UriLeoDeficationHelp_001 + "<br />" + UriLeoDeficationHelp_002 + "<br />" + UriLeoDeficationHelp_003;
-                    report.Add(deficationMessage);
-                }
-
-                //length check
-                // 1-2 months
-                String lengthIssue;
-                if (age > 30 & age < 60)
-                {
-                    if (latestLength.Lengths < 3)
-                    {
-
-                        HealthStatus += 2;
-                        lengthIssue = ReptileType.CommonName + " is below the average size for its' age, please follow these links on caring for young " + ReptileType.SpeciesName + ". Helpful links " + UriBabyLeoHelp_001 + "<br />" + UriBabyLeoHelp_002;
-                        report.Add(lengthIssue);
-                    }
-                }
-                // 3-6 months
-                else if (age > 90 & age < 182)
-                {
-                    if (latestLength.Lengths < 4)
-                    {
-                        HealthStatus += 2;
-                        lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.SpeciesName + ". Helpful links" + "<br />" + UriJuvenileLeoHelp_001 + "<br />" + UriJuvenileLeoHelp_002;
-                        report.Add(lengthIssue);
-                    }
-                }
-                // greater than 6 months
-                else if (age > 182)
-                {
-                    if (latestLength.Lengths < 7)
-                    {
-                        HealthStatus += 2;
-                        lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.SpeciesName + ".<br /> Helpful links" + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoHelp_001 + " " + target + ">Leopard Gecko Health</a>";
-                        report.Add(lengthIssue);
-                    }
-                }
+                var dictionary = new Dictionary<string, HealthStatusVariables>
+                           {
+	                         {"Python regius", new HealthStatusVariables(40,100,125,75,28,56,5,10,15,28,56,65,10,24,36)},
+	                         {"Eublepharis macularius", new HealthStatusVariables(2,5,15,5,14,28,4,6,7,2,5,7,3,4,7)}
+                           };
 
 
+
+
+
+               if (dictionary.ContainsKey(ReptileType.ScientificName.ToString()))
+               {
+                   HealthStatusVariables reptile;
+                   dictionary.TryGetValue(ReptileType.ScientificName.ToString(), out reptile);
+                   int count = 0;
+                   for (int i = 0; i < LastFiveWeights.Count(); i++)
+                   {
+                       if (age <= 30)
+                       {
+                           break;
+                       }
+                       else
+                       {
+                           // 1-2 months
+                           if (age > 30 & age < 60)
+                           {
+                               if (LastFiveWeights.FirstOrDefault().Weights < reptile.BabyWeight)
+                               {
+                                   HealthStatus += 2;
+                                   weightLossMessage = ReptileType.CommonName + " has not gained much weight, please follow these links on caring for young " + ReptileType.CommonName + ". " + "<br />" + UriBabyLeoHelp_001 + "<br />" + UriBabyLeoHelp_002;
+                                   report.Add(weightLossMessage);
+                                   break;
+                               }
+                           }
+                           // 3-6 months
+                           else if (age > 90 & age < 182)
+                           {
+                               if (WeightList.FirstOrDefault().Weights < reptile.JuvinileWeight)
+                               {
+                                   HealthStatus += 2;
+                                   weightLossMessage = ReptileType.NickName + " has not gained much weight, this is serious because of the age " + ReptileType.Born + " please follow these links on caring for young " + ReptileType.SpeciesName + ". " + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">Care Sheet</a>";
+                                   report.Add(weightLossMessage);
+                                   break;
+                               }
+                           }
+                           // greater than 6 months
+                           else if (age > 182)
+                           {
+                               if (LastFiveWeights.ElementAt(i).Weights > LastFiveWeights.First().Weights)
+                               {
+                                   WeightLoss = LastFiveWeights.ElementAt(i).Weights - LastFiveWeights.First().Weights;
+
+                                   if (WeightLoss >= reptile.DangerWeightLoss)
+                                   {
+
+                                       weightLossMessage = ReptileType.NickName + " has lost " + WeightLoss + " grams. Since " + LastFiveWeights.ElementAt(i).Date.ToShortDateString() + " This is very seriours.<br /> Helpful links:" + "<br />  <a href=" + UriLeoHelp_001 + " " + target + ">General Help</a>";
+                                       report.Add(weightLossMessage);
+                                       if (count < 1)
+                                       {
+                                           HealthStatus += 2;
+                                           DangerWeight = true;
+                                           count++;
+                                       }
+
+                                   }
+                                   else if (WeightLoss >= reptile.MinorWeightLoss && WeightLoss <= reptile.MinorWeightLoss)
+                                   {
+                                       if (count < 1)
+                                       {
+                                           MinorWeight = true;
+                                           HealthStatus += 1;
+                                           count++;
+                                       }
+                                       weightLossMessage = ReptileType.NickName + " has lost " + WeightLoss + " grams.Since " + LastFiveWeights.ElementAt(i).Date.ToShortDateString() + " This reptile requires attention.<br /> Helpful links:" + "<br />  <a href=" + UriLeoHelp_001 + " " + target + ">General Help</a>";
+                                       report.Add(weightLossMessage);
+                                   }
+                               }
+                           }
+                       }
+
+                   }
+
+                   //breeding check
+                   String justGaveBirth;
+                   if (HealthStatus > 0)
+                   {
+                       if (ReptileType.Gender == Gender.Female)
+                       {
+                           DateTime start = ReptileType.DueDate;
+                           TimeSpan ts = newDate - start;
+                           int differenceInDays = ts.Days;
+
+                           if (differenceInDays < reptile.DaySinceBirthLong)
+                           {
+                               if (DangerWeight == true)
+                               {
+                                   HealthStatus += 2;
+                                   justGaveBirth = "This reptile gave birth on "+ReptileType.DueDate.ToShortDateString()+". This would explain the weight loss of " + WeightLoss + " grams. This is a serious amount of weight loss. Please reconsider breeding this reptile. Please read these links on caring for " + ReptileType.ScientificName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
+                                   report.Add(justGaveBirth);
+                               }
+                               else if (MinorWeight == true)
+                               {
+                                   HealthStatus += 1;
+                                   justGaveBirth = "This reptile  gave birth on" + ReptileType.DueDate.ToShortDateString() + ". This would explain the weight loss of " + WeightLoss + " grams. This is a minor amount of weight loss. This would be normal. Please read these links on caring for " + ReptileType.ScientificName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
+                                   report.Add(justGaveBirth);
+                               }
+                           }
+                           else if (differenceInDays > reptile.DaySinceBirth & differenceInDays < reptile.DaySinceBirthLong)
+                           {
+                               if (DangerWeight == true)
+                               {
+                                   HealthStatus += 2;
+                                   justGaveBirth = "This reptile birth on " + ReptileType.DueDate.ToShortDateString() + ". This would explain the weight loss of " + WeightLoss + " grams. This is a serious amount of weight loss. This would not be normal. Please read these links on caring for " + ReptileType.ScientificName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
+                                   report.Add(justGaveBirth);
+                               }
+                               else if (MinorWeight == true)
+                               {
+                                   HealthStatus += 1;
+                                   justGaveBirth = "This reptile birth on " + ReptileType.DueDate.ToShortDateString() + ". This would explain the weight loss of " + WeightLoss + " grams. This is a minor amount of weight loss. This would be normal. Consider seperating this reptile or a bigger diet to help gain weight. Please read these links on caring for " + ReptileType.ScientificName + ".<br /> " + UriLeoBreedingHelp_001 + "<br />" + UriLeoBreedingHelp_002;
+                                   report.Add(justGaveBirth);
+                               }
+                           }
+                       }
+                   }
+
+                   //shed check
+                   String shedWarning;
+
+                   if (latestShed.Sheds == ShedType.Inshed || latestShed.Sheds == ShedType.Badshed || latestShed.Sheds == ShedType.Preshed)
+                   {
+                       DateTime shedDate = latestShed.Date;
+                       TimeSpan ts = newDate - shedDate;
+                       int diffInDays = ts.Days;
+
+                       if (diffInDays > reptile.ShedLong)
+                       {
+                           HealthStatus += 2;
+                           shedWarning = ReptileType.NickName + " is in " + latestShed.Sheds.ToString() + " for the past " + diffInDays + " days. This is not normal. Please read these links to help solve this issue." + "<br />  <a href=" + UriLeoSheddingHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriLeoSheddingHelp_002 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoSheddingHelp_003 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoSheddingHelp_004 + " " + target + ">Leopard Gecko shedding</a>";
+
+                           report.Add(shedWarning);
+                       }
+                       else if (diffInDays > reptile.ShedShort & diffInDays < reptile.ShedMedium)
+                       {
+                           HealthStatus += 1;
+                           shedWarning = ReptileType.NickName + "is in" + latestShed.Sheds.ToString() + " for the past " + diffInDays + " days. This is ok. Please read these links if this issue continues. " + "<br />  <a href=" + UriLeoSheddingHelp_001 + " " + target + ">General Shedding help</a> <br />  <a href=" + UriLeoSheddingHelp_002 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoSheddingHelp_003 + " " + target + ">General  help</a> <br />  <a href=" + UriLeoSheddingHelp_004 + " " + target + ">YouTube video</a>";
+                           report.Add(shedWarning);
+                       }
+                   }
+
+                   //defication check
+                   String deficationMessage;
+                   DateTime defDate = latestDefication.Date;
+                   DateTime feedingDate = latestFeeding.Date;
+                   // System.Diagnostics.Debug.WriteLine(latestFeeding.Date +"   " +ReptileType.ReptileId+ ReptileType.ReptileId+"Hello-----------feeding date"); // test to check order of list
+
+                   TimeSpan Deftimes = newDate - defDate;
+                   TimeSpan Feedtimes = newDate - feedingDate;
+                   int DiffDeficationInDays = Deftimes.Days;
+                   int diffInFeeding = Feedtimes.Days;
+
+                   if (DiffDeficationInDays > reptile.DeficationLong)
+                   {
+                       HealthStatus += 2;
+                       if (diffInFeeding > 5)
+                       {
+                           deficationMessage = ReptileType.NickName + " has not passed soilds in " + DiffDeficationInDays + " days, this is a seriours condition for " + ReptileType.ScientificName + ". Although the reptile has not feed in the past " + diffInFeeding + " days this could explain the issue.Consider bringing the reptile to the vet for checks.<br /> Helpful links <br />  <a href=" + UriLeoDeficationHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriLeoDeficationHelp_002 + " " + target + ">Defication Help</a> <br />  <a href=" + UriLeoDeficationHelp_003 + " " + target + ">General Information</a>";
+                           report.Add(deficationMessage);
+                       }
+                       else
+                       {
+                           deficationMessage = ReptileType.NickName + " has not passed soilds in " + DiffDeficationInDays + " days, this is a seriours condition for " + ReptileType.ScientificName + "Consider bringing the reptile to the vet for checks.<br /> Helpful links <br />  <a href=" + UriLeoDeficationHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriLeoDeficationHelp_002 + " " + target + ">Defication Help</a> <br />  <a href=" + UriLeoDeficationHelp_003 + " " + target + ">General Information</a>";
+                           report.Add(deficationMessage);
+                       }
+
+                   }
+                   else if (DiffDeficationInDays > reptile.DeficationShort & DiffDeficationInDays < reptile.DeficationMedium)
+                   {
+                       HealthStatus += 1;
+                       deficationMessage = ReptileType.NickName + " has not passed solids in " + DiffDeficationInDays + " days.This is not to serious but if this does not change consider bringing the reptile to the vet. Helpful links <br />  <a href=" + UriLeoDeficationHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriLeoDeficationHelp_002 + " " + target + ">Defication Help</a> <br />  <a href=" + UriLeoDeficationHelp_003 + " " + target + ">General Information</a>";
+                       report.Add(deficationMessage);
+                   }
+
+
+                   //length check
+                   // 1-2 months
+                   String lengthIssue;
+
+                   // System.Diagnostics.Debug.WriteLine(latestLength.Lengths +ReptileType.ReptileId+ "Hello-----------feeding date"); // test to check order of list
+                   if (age > 30 & age < 60)
+                   {
+                       if (latestLength.Lengths < reptile.LengthBaby)
+                       {
+
+                           HealthStatus += 2;
+                           lengthIssue = ReptileType.CommonName + " is below the average size for its' age, please follow these links on caring for young " + ReptileType.ScientificName + ". Helpful links " + "<br />  <a href=" + UriBabyLeoHelp_001 + " " + target + ">Juvenile Help</a> <br />  <a href=" + UriBabyLeoHelp_002 + " " + target + ">General Information</a>";
+                           report.Add(lengthIssue);
+                       }
+                   }
+                   // 3-6 months
+                   else if (age > 90 & age < 182)
+                   {
+                       if (latestLength.Lengths < reptile.LengthJuv)
+                       {
+                           HealthStatus += 2;
+                           lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.ScientificName + ". Helpful links" + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">Juvenile Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">General Information</a>";
+                           report.Add(lengthIssue);
+                       }
+                   }
+                   // greater than 6 months
+                   else if (age > 182)
+                   {
+                       if (latestLength.Lengths < reptile.LengthAdult)
+                       {
+                           HealthStatus += 2;
+                           lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.ScientificName + ".<br /> Helpful links" + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoHelp_001 + " " + target + ">Leopard Gecko Health</a>";
+                           report.Add(lengthIssue);
+                       }
+                   }
+               }
+                //green
                 if (HealthStatus == 0)
                 {
                     colour = "#7EBF7E";
-                }
-                else if (HealthStatus >= 1 || HealthStatus <= 2)
+                } //Unmellow Yellow
+                else if (HealthStatus >= 1 && HealthStatus <= 2)
                 {
                     colour = "#FFFF66";
-                }
-                else if (HealthStatus <= 4)
+                }//orange yello
+                else if (HealthStatus >= 3  && HealthStatus <= 4)
                 {
                     colour = "#FFCC00";
-                }
-                else if (HealthStatus == 6)
+                } //orange
+                else if (HealthStatus >= 5 && HealthStatus <= 6)
                 {
                     colour = "#FF9900";
-                }
-                else if (HealthStatus == 8)
+                }// red
+                else if (HealthStatus >= 7 && HealthStatus <= 8)
                 {
                     colour = "#FF0000";
-                }
-                else if (HealthStatus == 10)
+                } // black
+                else if (HealthStatus >= 9 && HealthStatus <= 10)
                 {
                     colour = "#000000";
                 }
@@ -304,6 +330,4 @@ namespace ReptileManager.Services
             }
         }
     }
-
-
 }

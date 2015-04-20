@@ -112,13 +112,14 @@ namespace ReptileManager.Controllers
             Highcharts g2 = new Highcharts("chart2")
                .InitChart(new Chart { Type = ChartTypes.Column })
                .SetTitle(new Title { Text = "Feedings" })
+                .SetCredits(new Credits { Enabled = false })
                .SetXAxis(new XAxis { Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" } })
                .SetYAxis(new YAxis
                {
-                   Min = 0,
+                   
                    Title = new YAxisTitle { Text = "grams" }
                })
-               .SetLegend(new Legend
+          /*     .SetLegend(new Legend
                {
                    Layout = Layouts.Vertical,
                    Align = HorizontalAligns.Center,
@@ -128,7 +129,7 @@ namespace ReptileManager.Controllers
                    Floating = true,
                    BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF")),
                    Shadow = true
-               })
+               })*/
                .SetTooltip(new Tooltip { Formatter = @"function() { return ''+ this.x +': '+ this.y +' grams'; }" })
                .SetPlotOptions(new PlotOptions
                {
@@ -140,15 +141,16 @@ namespace ReptileManager.Controllers
                })
                .SetSeries(new[]
                 {
-                    new Series { Name = "Feedings", Data = new Data(newFeedingsObj) },
-                    new Series { Name = "Weight", Data = new Data(newWeightsObj)},
-                    new Series {Name = "Average", Data = new Data(AvgForSpecies)}
+                    new Series {Color = ColorTranslator.FromHtml("#87CEFA"),Name = "Feedings", Data = new Data(newFeedingsObj)},
+                    new Series {Color = ColorTranslator.FromHtml("#FF66FF") ,Name = "Weight", Data = new Data(newWeightsObj)},
+                    new Series {Color = ColorTranslator.FromHtml("#6C7A89") ,Name = "Average", Data = new Data(AvgForSpecies)}
                 });
           
             Highcharts g1 = new Highcharts("chart1")
                  .InitChart(new Chart { Type = ChartTypes.Areaspline })
                  .SetTitle(new Title { Text = "Weights for each month " })
-                 .SetLegend(new Legend
+                   .SetCredits(new Credits { Enabled = false })
+                /* .SetLegend(new Legend
                  {
                      Layout = Layouts.Vertical,
                      Align = HorizontalAligns.Center,
@@ -156,7 +158,7 @@ namespace ReptileManager.Controllers
                      Floating = true,
                      BorderWidth = 1,
                      BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF"))
-                 })
+                 })*/
 
                .SetXAxis(new XAxis
                {
@@ -167,14 +169,15 @@ namespace ReptileManager.Controllers
                 .SetSeries(new[]
                 {
                     new Series {  Name = "Weights", Data = new Data(newWeightsObj)},
-                    new Series {   Name = "Average", Data = new Data(AvgForSpecies)},
+                    new Series {  Color = ColorTranslator.FromHtml("#6C7A89"),Name = "Average", Data = new Data(AvgForSpecies)},
                    
                });
 
             Highcharts g3 = new Highcharts("chart3")
                .InitChart(new Chart { Type = ChartTypes.Areaspline })
                .SetTitle(new Title { Text = "Length for each month " })
-               .SetLegend(new Legend
+               .SetCredits(new Credits{Enabled= false})
+             /*  .SetLegend(new Legend
                {
                    Layout = Layouts.Vertical,
                    Align = HorizontalAligns.Left,
@@ -182,13 +185,15 @@ namespace ReptileManager.Controllers
                    Floating = true,
                    BorderWidth = 1,
                    BackgroundColor = new BackColorOrGradient(ColorTranslator.FromHtml("#FFFFFF"))
-               })
+               })*/
 
              .SetXAxis(new XAxis
              {
-                 Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
-                 Title = new XAxisTitle { Text = "Months" }
+                  Title = new XAxisTitle { Text = "Months" },
+                 Categories = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }
+                
              })
+
               .SetYAxis(new YAxis { Title = new YAxisTitle { Text = "Length units in inches" } })
               .SetSeries(new Series
               {

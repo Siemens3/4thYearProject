@@ -240,7 +240,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reptiles.cs" />
-    <Compile Include="DataContexts\ReptileContext.cs" />
+    <Compile Include="Models\ReptileContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QrView.aspx.cs">
       <DependentUpon>QrView.aspx</DependentUpon>
@@ -250,6 +250,7 @@
       <DependentUpon>QrView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Services\HealthStatus.cs" />
+    <Compile Include="Services\HealthStatusVariables.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

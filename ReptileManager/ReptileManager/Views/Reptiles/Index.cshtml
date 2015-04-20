@@ -4,7 +4,7 @@
     ViewBag.Title = "Reptiles";
 }
 
-<h2>Index</h2>
+<h2>My Reptiles</h2>
 <style>
     .Green{
     color:white;
@@ -24,9 +24,9 @@
 </style>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("New Reptile", "Create")
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             <content>Health</content>
@@ -163,22 +163,22 @@
     @if (item.DueForFeeding() == ReptileManager.Models.Status.Today)
     {
 
-        <content class="Green">F</content>
-   
+        <content class="Green">@Html.ActionLink("F", "Feeding", new { id = item.ReptileId }, htmlAttributes: new { @Style = "color:#fff" })</content>
+  
         // #009933 // green
 
     }
     else if (item.DueForFeeding() == ReptileManager.Models.Status.OneDayLate)
     {
         // #FF6600 // orange
-            <content class="Orange">F</content>
+            <content class="Orange">@Html.ActionLink("F", "Feeding", new { id = item.ReptileId }, htmlAttributes: new { @Style = "color:#fff" })</content>
           
 
         }
         else if (item.DueForFeeding() == ReptileManager.Models.Status.TwoOrMoreDaysLate)
         {
             //   #FF0000// re
-            <content class="Red">F</content>
+            <content class="Red">@Html.ActionLink("F", "Feeding", new { id = item.ReptileId }, htmlAttributes: new {@Style="color:#fff" })</content>
            
         }
         else if (item.DueForFeeding() == ReptileManager.Models.Status.Default)
@@ -283,9 +283,9 @@
          @Html.DisplayFor(modelItem => item.SalesCardComment)
      </td>*@
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReptileId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ReptileId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReptileId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ReptileId }, htmlAttributes: new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Details", "Details", new { id = item.ReptileId }, htmlAttributes: new { @class = "btn btn-info" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.ReptileId }, htmlAttributes: new { @class = "btn btn-danger" })
 
            
         </td>

@@ -522,6 +522,7 @@
     </div>
     <div class="details-list-separator"></div>
     <br />
+  
     <div class="well">
         <p style="font-size:18px">Health Status</p>
         <div class="well" style="background-color: #fff">
@@ -541,9 +542,9 @@
 
     <br />
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId }) 
+          @Html.ActionLink("Back to List", "Index")
+</p>
 
     <script type="text/javascript" src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
 
