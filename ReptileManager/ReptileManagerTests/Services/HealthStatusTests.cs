@@ -61,12 +61,8 @@ namespace ReptileManager.Services.Tests
          {
              HealthStatus health = new HealthStatus();
              var id = "6";
-              
-            List<String> weightLossMessage = health.GetHealth(id).Item2;
-             System.Diagnostics.Trace.WriteLine("Testing unit test");
-           System.Diagnostics.Trace.WriteLine(weightLossMessage.Count);
-           
-             Assert.IsNotNull(weightLossMessage);
+             List<String> weightLossMessage = health.GetHealth(id).Item2;
+            Assert.AreEqual(1,weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn1_2Months()
@@ -75,10 +71,9 @@ namespace ReptileManager.Services.Tests
              var id = "7";
 
              List<String> weightLossMessage = health.GetHealth(id).Item2;
-             System.Diagnostics.Trace.WriteLine("Testing unit test");
-             System.Diagnostics.Trace.WriteLine(weightLossMessage.Count);
+            
 
-             Assert.IsNotNull(weightLossMessage);
+             Assert.AreEqual(1, weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn3_6Months()
@@ -87,10 +82,9 @@ namespace ReptileManager.Services.Tests
              var id = "8";
 
              List<String> weightLossMessage = health.GetHealth(id).Item2;
-             System.Diagnostics.Trace.WriteLine("Testing unit test");
-             System.Diagnostics.Trace.WriteLine(weightLossMessage.Count);
 
-             Assert.IsNotNull(weightLossMessage);
+
+             Assert.AreEqual(1, weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn6Months()
@@ -99,10 +93,9 @@ namespace ReptileManager.Services.Tests
              var id = "9";
 
              List<String> weightLossMessage = health.GetHealth(id).Item2;
-             System.Diagnostics.Trace.WriteLine("Testing unit test");
-             System.Diagnostics.Trace.WriteLine(weightLossMessage.Count);
+            
 
-             Assert.IsNotNull(weightLossMessage);
+             Assert.AreEqual(1, weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn6Months2()
