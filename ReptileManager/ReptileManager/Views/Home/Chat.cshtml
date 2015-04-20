@@ -2,13 +2,21 @@
 @{
     ViewBag.Title = "Chat";
 }
+<style>
+    #discussion{
+        height:400px;
+        width:600px;
+        overflow-y:scroll;
+    }
+</style>
 
 <h2>Chat</h2>
 <div class="container">
-   @* <input type="text" id="message" />
+    <ul id="discussion"></ul>
+    <input type="text" id="message" />
     <input type="button" id="sendmessage" value="Send" />
     <input type="hidden" id="displayname" />
-    <ul id="discussion"></ul> *@
+     
    
     </div>
 
@@ -24,11 +32,13 @@
         $(function () {
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.ChatHub;
+            var $output = $('#discussion');
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (name, message) {
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                $output.append('<li><strong>' + htmlEncode(name)
                     + '</strong>: ' + htmlEncode(message) + '</li>');
+                $output.scrollTop($output[0].scrollHeight);
             };
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));

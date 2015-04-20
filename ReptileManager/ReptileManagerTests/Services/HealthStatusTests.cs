@@ -8,10 +8,6 @@ namespace ReptileManager.Services.Tests
     [TestClass()]
     public class HealthStatusTests
     {
-
-      
-      
-        
          [TestMethod()]
         public void GetHealthColourCheckYellow()
         {
