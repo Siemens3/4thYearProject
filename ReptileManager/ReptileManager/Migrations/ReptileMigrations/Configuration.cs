@@ -49,9 +49,9 @@ namespace ReptileManager.Migrations.ReptileMigrations
                          SpeciesNumber = "6",
                          FatherNotInDb = null,
                          MotherNotInDb =null,
-                         FeedInterval = 1,
+                         FeedInterval = 7,
                          TimeStamp = DateTime.Parse("2015-4-09 10:00 AM"),
-                         DueDate = DateTime.Parse("2015, 3, 25"),
+                         DueDate = DateTime.Parse("2015, 3, 20"),
                          TubeBoxNumber = "2",
                          Note = "Bee is very aggressive",
                          SalesCardComment = "Snake is easy to care for but needs someone with some experience." 
@@ -86,7 +86,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
                           SpeciesNumber = "8",
                           FatherNotInDb = null,
                           MotherNotInDb = null,
-                          FeedInterval = 7,
+                          FeedInterval = 4,
                          TimeStamp = DateTime.Parse("2015-4-08 10:00 AM"),
                          DueDate = DateTime.Parse("2015, 3, 14"),
                           TubeBoxNumber = "4",
@@ -405,13 +405,13 @@ namespace ReptileManager.Migrations.ReptileMigrations
 
             var length = new List<Length>
             {
-                new Length{Lengths = 6, Date = DateTime.Parse("2015,1,10"),
+                new Length{Lengths = 15, Date = DateTime.Parse("2015,1,10"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Length{Lengths = 12, Date = DateTime.Parse("2015,2,10"),
+                    new Length{Lengths = 16, Date = DateTime.Parse("2015,2,10"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Length{Lengths = 14, Date = DateTime.Parse("2015,3,10"),
+                    new Length{Lengths = 16.5, Date = DateTime.Parse("2015,3,10"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Length{Lengths = 15, Date = DateTime.Parse("2015,4,10"),
+                    new Length{Lengths = 17, Date = DateTime.Parse("2015,4,10"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
 
                    new Length{Lengths = 5,Date = DateTime.Parse("2015,1,5"),
@@ -441,13 +441,13 @@ namespace ReptileManager.Migrations.ReptileMigrations
                     new Length{Lengths = 6.5,Date = DateTime.Parse("2015,4,5"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "4").ReptileId},
 
-                     new Length{Lengths = 5,Date = DateTime.Parse("2015,1,5"),
+                     new Length{Lengths = 10,Date = DateTime.Parse("2015,1,5"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
-                    new Length{Lengths = 5.5,Date = DateTime.Parse("2015,2,5"),
+                    new Length{Lengths = 15,Date = DateTime.Parse("2015,2,5"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
-                    new Length{Lengths = 6,Date = DateTime.Parse("2015,3,5"),
+                    new Length{Lengths = 20,Date = DateTime.Parse("2015,3,5"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
-                    new Length{Lengths = 6.5,Date = DateTime.Parse("2015,4,5"),
+                    new Length{Lengths = 32,Date = DateTime.Parse("2015,4,5"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
 
                      new Length{Lengths = 5,Date = DateTime.Parse("2015,1,5"),
@@ -499,20 +499,24 @@ namespace ReptileManager.Migrations.ReptileMigrations
             var feeding = new List<Feeding>
             {
                 new Feeding{Date = DateTime.Parse("2015,1,10"),Feedings = FeedingType.RatFrozen,
-                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                    FoodSize = FoodSize.M,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                      new Feeding{Date = DateTime.Parse("2015,2,10"),Feedings = FeedingType.RatFrozen,
-                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                    FoodSize = FoodSize.M,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                      new Feeding{Date = DateTime.Parse("2015,3,10"),Feedings = FeedingType.RatFrozen,
-                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                    FoodSize = FoodSize.M,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                      new Feeding{Date = DateTime.Parse("2015,4,10"),Feedings = FeedingType.RatFrozen,
-                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                    FoodSize = FoodSize.M,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                    
 
-                    new Feeding{Date = DateTime.Parse("2015,3,25"),Feedings = FeedingType.RatFrozen,
+                    new Feeding{Date = DateTime.Parse("2015,1,25"),Feedings = FeedingType.RatFrozen,
+                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
+                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
+                   
+                    new Feeding{Date = DateTime.Parse("2015,2,25"),Feedings = FeedingType.RatFrozen,
                     FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
                    
@@ -520,11 +524,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
                     FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
                    
-                    new Feeding{Date = DateTime.Parse("2015,3,25"),Feedings = FeedingType.RatFrozen,
-                    FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
-                   ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
-                   
-                    new Feeding{Date = DateTime.Parse("2015,3,25"),Feedings = FeedingType.RatFrozen,
+                    new Feeding{Date = DateTime.Parse("2015,4,8"),Feedings = FeedingType.RatFrozen,
                     FoodSize = FoodSize.S,NumItemsFed = 1,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
                    
@@ -640,19 +640,19 @@ namespace ReptileManager.Migrations.ReptileMigrations
 
             var defication = new List<Defication>
             {
-                new Defication{Date = DateTime.Parse("2015,3,10"),Defications= "Normal",Notes = "",
+                new Defication{Date = DateTime.Parse("2015,2,10"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
+                    new Defication{Date = DateTime.Parse("2015,2,9"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
                      new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "3").ReptileId},
                      new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "4").ReptileId},
-                     new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
+                     new Defication{Date = DateTime.Parse("2015,3,23"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
                      new Defication{Date = DateTime.Parse("2015,4,10"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "6").ReptileId},
-                     new Defication{Date = DateTime.Parse("2015,4,18"),Defications= "Normal",Notes = "",
+                     new Defication{Date = DateTime.Parse("2015,4,21"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "7").ReptileId},
                      new Defication{Date = DateTime.Parse("2015,4,18"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "8").ReptileId},
@@ -674,7 +674,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
 
             var shedsList = new List<Shed>
             {
-                new Shed{Date = DateTime.Parse("2015,3,31"),Sheds = ShedType.Preshed,Notes = "",
+                new Shed{Date = DateTime.Parse("2015,4,1"),Sheds = ShedType.Inshed,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                     new Shed{Date = DateTime.Parse("2015,3,31"),Sheds = ShedType.Badshed,Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "2").ReptileId},
@@ -708,13 +708,13 @@ namespace ReptileManager.Migrations.ReptileMigrations
 
             var weights = new List<Weight>
             {
-                new Weight{Weights = 65, Date = DateTime.Parse("2015,1,2"),
+                new Weight{Weights = 1200, Date = DateTime.Parse("2015,1,2"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Weight{Weights = 50, Date = DateTime.Parse("2015,2,2"),
+                    new Weight{Weights = 1100, Date = DateTime.Parse("2015,2,2"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Weight{Weights = 20, Date = DateTime.Parse("2015,3,2"),
+                    new Weight{Weights = 1000, Date = DateTime.Parse("2015,3,2"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
-                    new Weight{Weights = 15, Date = DateTime.Parse("2015,4,2"),
+                    new Weight{Weights = 925, Date = DateTime.Parse("2015,4,2"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "1").ReptileId},
                   
 
@@ -750,9 +750,9 @@ namespace ReptileManager.Migrations.ReptileMigrations
                     ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
                      new Weight{Weights = 55, Date = DateTime.Parse("2015,1,15"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
-                    new Weight{Weights = 48, Date = DateTime.Parse("2015,1,25"),
+                    new Weight{Weights = 65, Date = DateTime.Parse("2015,1,25"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
-                    new Weight{Weights = 70, Date = DateTime.Parse("2015,2,10"),
+                    new Weight{Weights = 85, Date = DateTime.Parse("2015,2,10"),
                    ReptileId = reptiles.Single(r =>r.ReptileId == "5").ReptileId},
 
                     

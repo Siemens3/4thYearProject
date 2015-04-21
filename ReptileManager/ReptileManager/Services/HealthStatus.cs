@@ -24,7 +24,7 @@ namespace ReptileManager.Services
 
 
                 var latestFeeding = db.Feedings.FirstOrDefault(f => f.ReptileId == id);
-                var latestLength = db.Lengths.FirstOrDefault(l => l.ReptileId == id);
+                var latestLength = db.Lengths.OrderByDescending(w => w.Date).FirstOrDefault(l => l.ReptileId == id);
                 var latestDefication = db.Defications.FirstOrDefault(d => d.ReptileId == id);
                 var latestShed = db.Sheds.FirstOrDefault(s => s.ReptileId == id);
 
@@ -109,6 +109,7 @@ namespace ReptileManager.Services
                            {
                                if (LastFiveWeights.FirstOrDefault().Weights < reptile.BabyWeight)
                                {
+                                   DangerWeight = true;
                                    HealthStatus += 2;
                                    weightLossMessage = ReptileType.CommonName + " has not gained much weight, please follow these links on caring for young " + ReptileType.CommonName + ". " + "<br />" + UriBabyLeoHelp_001 + "<br />" + UriBabyLeoHelp_002;
                                    report.Add(weightLossMessage);
@@ -116,12 +117,13 @@ namespace ReptileManager.Services
                                }
                            }
                            // 3-6 months
-                           else if (age > 90 & age < 182)
+                           else if (age > 61 & age < 182)
                            {
                                if (WeightList.FirstOrDefault().Weights < reptile.JuvinileWeight)
                                {
+                                   DangerWeight = true;
                                    HealthStatus += 2;
-                                   weightLossMessage = ReptileType.NickName + " has not gained much weight, this is serious because of the age " + ReptileType.Born + " please follow these links on caring for young " + ReptileType.SpeciesName + ". " + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">Care Sheet</a>";
+                                   weightLossMessage = ReptileType.NickName + " has not gained much weight, this is serious because of" +ReptileType.Gender.ToString() + ReptileType.Born.Value.ToShortDateString() + " please follow these links on caring for young " + ReptileType.ScientificName + ". " + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">Care Sheet</a>";
                                    report.Add(weightLossMessage);
                                    break;
                                }
@@ -269,20 +271,22 @@ namespace ReptileManager.Services
                    String lengthIssue;
 
                    // System.Diagnostics.Debug.WriteLine(latestLength.Lengths +ReptileType.ReptileId+ "Hello-----------feeding date"); // test to check order of list
-                   if (age > 30 & age < 60)
+                   if (age > 30 & age <= 60)
                    {
-                       if (latestLength.Lengths < reptile.LengthBaby)
+                       System.Diagnostics.Debug.WriteLine(latestLength.Lengths + "   " + ReptileType.ReptileId  + "Hello-----------length value"); // test to check order of list
+                       if (latestLength.Lengths <= reptile.LengthBaby)
                        {
 
                            HealthStatus += 2;
-                           lengthIssue = ReptileType.CommonName + " is below the average size for its' age, please follow these links on caring for young " + ReptileType.ScientificName + ". Helpful links " + "<br />  <a href=" + UriBabyLeoHelp_001 + " " + target + ">Juvenile Help</a> <br />  <a href=" + UriBabyLeoHelp_002 + " " + target + ">General Information</a>";
+                           lengthIssue = ReptileType.CommonName + " is below the average size for its' age, please follow these links on caring for young " + ReptileType.ScientificName + ". Helpful links " + "<br />  <a href=" + UriBabyLeoHelp_001 + " " + target + ">baby Help</a> <br />  <a href=" + UriBabyLeoHelp_002 + " " + target + ">General Information</a>";
                            report.Add(lengthIssue);
                        }
                    }
                    // 3-6 months
-                   else if (age > 90 & age < 182)
+                   else if (age > 61 & age < 182)
                    {
-                       if (latestLength.Lengths < reptile.LengthJuv)
+                       System.Diagnostics.Debug.WriteLine(latestLength.Lengths + "   " + ReptileType.ReptileId + "Hello-----------length value"); // test to check order of list
+                       if (latestLength.Lengths <= reptile.LengthJuv)
                        {
                            HealthStatus += 2;
                            lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.ScientificName + ". Helpful links" + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">Juvenile Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">General Information</a>";
@@ -292,7 +296,7 @@ namespace ReptileManager.Services
                    // greater than 6 months
                    else if (age > 182)
                    {
-                       if (latestLength.Lengths < reptile.LengthAdult)
+                       if (latestLength.Lengths <= reptile.LengthAdult)
                        {
                            HealthStatus += 2;
                            lengthIssue = ReptileType.NickName + " is below the average size for its' age,  please follow these links on caring for young " + ReptileType.ScientificName + ".<br /> Helpful links" + "<br />  <a href=" + UriJuvenileLeoHelp_001 + " " + target + ">General Help</a> <br />  <a href=" + UriJuvenileLeoHelp_002 + " " + target + ">General Information</a> <br /> <a href=" + UriLeoHelp_001 + " " + target + ">Leopard Gecko Health</a>";
@@ -308,7 +312,7 @@ namespace ReptileManager.Services
                 else if (HealthStatus >= 1 && HealthStatus <= 2)
                 {
                     colour = "#FFFF66";
-                }//orange yello
+                }//orange yellow
                 else if (HealthStatus >= 3  && HealthStatus <= 4)
                 {
                     colour = "#FFCC00";

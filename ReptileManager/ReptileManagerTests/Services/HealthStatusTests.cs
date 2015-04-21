@@ -8,8 +8,63 @@ namespace ReptileManager.Services.Tests
     [TestClass()]
     public class HealthStatusTests
     {
+        [TestMethod()]
+        public void GetHealthColourRedSnake()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "1";
+            string red = "#FF0000";
+            string colourRed = health.GetHealth(id).Item1;
+            Assert.AreEqual(red, colourRed);
+        }
+        [TestMethod()]
+        public void GetHealthCheckBorn6MonthsSnake()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "1";
+            List<String> messages = health.GetHealth(id).Item2;
+            Assert.AreEqual(6, messages.Count);
+        }
+
+        [TestMethod()]
+        public void GetHealthColourBlackSnake()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "2";
+            string black = "#000000";
+            string colourBlack = health.GetHealth(id).Item1;
+            Assert.AreEqual(black, colourBlack);
+        }
+       
+        [TestMethod()]
+        public void GetHealthCheckBorn3_6MonthsSnake()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "2";
+            List<String> weightLossMessage = health.GetHealth(id).Item2;
+            Assert.AreEqual(5, weightLossMessage.Count);
+        }
+
+        [TestMethod()]
+        public void GetHealthColourOrangeYellowSnake()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "5";
+            string orangeYellow = "#FFCC00";
+            string colourOrangeYellow = health.GetHealth(id).Item1;
+            Assert.AreEqual(orangeYellow, colourOrangeYellow);
+        }
+        [TestMethod()]
+        public void GetHealthCheckBorn3_6MonthsSnake2()
+        {
+            HealthStatus health = new HealthStatus();
+            var id = "5";
+            List<String> messages = health.GetHealth(id).Item2;
+            Assert.AreEqual(2, messages.Count);
+        }
+       
          [TestMethod()]
-        public void GetHealthColourCheckYellow()
+        public void GetHealthColourCheckUnmellowYellow()
         {
             HealthStatus health = new HealthStatus();
             var id = "6";
@@ -17,24 +72,26 @@ namespace ReptileManager.Services.Tests
             string colourYellow = health.GetHealth(id).Item1;
             Assert.AreEqual(yellow, colourYellow);
        }
+
          [TestMethod()]
-         public void GetHealthColourCheckOrangeYellow()
+         public void GetHealthColourCheckOrange()
          {
              HealthStatus health = new HealthStatus();
              var id = "7";
-             string orangeYellow = "#FF9900";
-             string colourOrangeYellow = health.GetHealth(id).Item1;
-             Assert.AreEqual(orangeYellow, colourOrangeYellow);
+             string orange = "#FF9900";
+             string colourOrange = health.GetHealth(id).Item1;
+             Assert.AreEqual(orange, colourOrange);
          }
-     /*    [TestMethod]
-         public void GetHealthColourCheckOrangeYellow()
+
+         [TestMethod()]
+         public void GetHealthCheckBorn1_2Months()
          {
              HealthStatus health = new HealthStatus();
-             var id = "8";
-             string yellow = "#FFCC00";
-             string colourOrangeYellow = health.GetHealth(id).Item1;
-             Assert.AreEqual(yellow, colourOrangeYellow);
-         }*/
+             var id = "7";
+             List<String> weightLossMessage = health.GetHealth(id).Item2;
+             Assert.AreEqual(3, weightLossMessage.Count);
+         }
+
          [TestMethod]
          public void GetHealthColourCheckRed()
          {
@@ -64,17 +121,7 @@ namespace ReptileManager.Services.Tests
              List<String> weightLossMessage = health.GetHealth(id).Item2;
             Assert.AreEqual(1,weightLossMessage.Count);
          }
-         [TestMethod()]
-         public void GetHealthCheckBorn1_2Months()
-         {
-             HealthStatus health = new HealthStatus();
-             var id = "7";
-
-             List<String> weightLossMessage = health.GetHealth(id).Item2;
-            
-
-             Assert.AreEqual(1, weightLossMessage.Count);
-         }
+        
          [TestMethod()]
          public void GetHealthCheckBorn3_6Months()
          {
@@ -84,7 +131,7 @@ namespace ReptileManager.Services.Tests
              List<String> weightLossMessage = health.GetHealth(id).Item2;
 
 
-             Assert.AreEqual(1, weightLossMessage.Count);
+             Assert.AreEqual(3, weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn6Months()
@@ -95,7 +142,7 @@ namespace ReptileManager.Services.Tests
              List<String> weightLossMessage = health.GetHealth(id).Item2;
             
 
-             Assert.AreEqual(1, weightLossMessage.Count);
+             Assert.AreEqual(5, weightLossMessage.Count);
          }
          [TestMethod()]
          public void GetHealthCheckBorn6Months2()
@@ -103,7 +150,7 @@ namespace ReptileManager.Services.Tests
              HealthStatus health = new HealthStatus();
              var id = "10";
              List<String> messages = health.GetHealth(id).Item2;
-             Assert.ReferenceEquals(messages,0);
+             Assert.AreEqual(0, messages.Count);
          }
         
 

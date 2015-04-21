@@ -249,6 +249,7 @@
     <Compile Include="QrView.aspx.designer.cs">
       <DependentUpon>QrView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Services\ReptileCharts.cs" />
     <Compile Include="Services\HealthStatus.cs" />
     <Compile Include="Services\HealthStatusVariables.cs" />
     <Compile Include="Startup.cs" />

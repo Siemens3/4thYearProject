@@ -15,9 +15,9 @@ namespace ReptileManager.Services
             MinorWeightLoss = minor;
             DaySinceBirth = dsb;
             DaySinceBirthLong = daysbl;
-            ShedLong= ss;
+            ShedShort= ss;
             ShedMedium = sm;
-            ShedShort = sl;
+            ShedLong = sl;
             DeficationShort = ds;
             DeficationMedium = dm;
             DeficationLong = dl;
