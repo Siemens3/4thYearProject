@@ -658,7 +658,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
                    ReptileId = reptiles.Single(r =>r.ReptileId == "8").ReptileId},
                      new Defication{Date = DateTime.Parse("2015,3,31"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "9").ReptileId},
-                     new Defication{Date = DateTime.Parse("2015,4,19"),Defications= "Normal",Notes = "",
+                     new Defication{Date = DateTime.Parse("2015,4,22"),Defications= "Normal",Notes = "",
                    ReptileId = reptiles.Single(r =>r.ReptileId == "10").ReptileId},
              };
             foreach (Defication d in defication)

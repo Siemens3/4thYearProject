@@ -14,7 +14,7 @@
 <div class="container">
     <ul id="discussion"></ul>
     <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" />
+    <input type="button" id="sendmessage" value="Send"  />
     <input type="hidden" id="displayname" />
      
    
@@ -54,6 +54,7 @@
                 });
             });
         });
+
         // This optional function html-encodes messages for display in the page.
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
