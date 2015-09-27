@@ -1,14 +1,9 @@
-﻿using DotNet.Highcharts;
-using DotNet.Highcharts.Enums;
-using DotNet.Highcharts.Helpers;
-using DotNet.Highcharts.Options;
-using ReptileManager.Models;
+﻿using ReptileManager.Models;
 using ReptileManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;

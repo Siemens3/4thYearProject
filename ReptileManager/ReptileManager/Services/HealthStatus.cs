@@ -105,7 +105,7 @@ namespace ReptileManager.Services
                        else
                        {
                            // 1-2 months
-                           if (age > 30 & age < 60)
+                           if (age > 30 & age <= 60)
                            {
                                if (LastFiveWeights.FirstOrDefault().Weights < reptile.BabyWeight)
                                {

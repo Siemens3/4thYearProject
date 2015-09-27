@@ -10,11 +10,9 @@ using System.Linq;
 
 
 
-// http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files // image tutorial 
+ 
 namespace ReptileManager.Models
 {
-
-    
     public enum Gender { Male, Female, Unknow }
     public enum WeightProgress { PlusWeight, MinusWeight }
     public enum FeedingType
@@ -327,11 +325,7 @@ namespace ReptileManager.Models
       public virtual Reptile Reptile { get; set; }
   }
   
-    public class ParentView
-    {
-        public  Reptile Reptiles { get; set; }
-        public  Mating Matings { get; set; }
-    }
+    
       // one to many relationships
      // Do not want users setting Ids of any records apart from the reptile
      public class Mating
