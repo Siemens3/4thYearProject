@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Logging;
+using Persistence;
+
 
 namespace ReptileManager
 {
@@ -16,6 +15,13 @@ namespace ReptileManager
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            PhotoService photoService = new PhotoService(new Logger());
+            photoService.CreateAndConfigureAsync();
+
         }
+
+       
+        
     }
 }

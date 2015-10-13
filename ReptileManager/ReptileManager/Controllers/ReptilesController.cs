@@ -1,4 +1,6 @@
-﻿using ReptileManager.Models;
+﻿using Logging;
+using Persistence;
+using ReptileManager.Models;
 using ReptileManager.Services;
 using System;
 using System.Collections.Generic;
@@ -173,23 +175,28 @@ namespace ReptileManager.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    if (upload != null && upload.ContentLength > 0)
-                    {
-                        var image = new File
-                        {
-                            FileName = System.IO.Path.GetFileName(upload.FileName),
-                            FileType = FileType.image,
-                            ContentType = upload.ContentType
-                        };
-                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                        {
-                            
-                            image.Content = reader.ReadBytes(upload.ContentLength);
-                           
-                        }
-                       
-                        reptile.Files = new List<File> { image };
-                    }
+                    //if (upload != null && upload.ContentLength > 0)
+                    //{
+                    //    var image = new File
+                    //    {
+                    //        FileName = System.IO.Path.GetFileName(upload.FileName),
+                    //        FileType = FileType.image,
+                    //        ContentType = upload.ContentType
+                    //    };
+                    //    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    //    {
+
+                    //        image.Content = reader.ReadBytes(upload.ContentLength);
+
+                    //    }
+
+                    //    reptile.Files = new List<File> { image };
+                    //}
+                    // new image storage in blob
+                    PhotoService photoService = new PhotoService(new Logger());
+                    reptile.imageURL = await photoService.UploadPhotoAsync(upload);
+
+
                     //creates qr code and saves it as binary data
                     var newQr = reptile.QrGen();
 
@@ -245,24 +252,27 @@ namespace ReptileManager.Controllers
            {
                try
                {
-                   if(upload != null && upload.ContentLength > 0)
-                   {
-                       if (reptileToUpdate.Files.Any(f => f.FileType == FileType.image))
-                       {
-                           db.Files.Remove(reptileToUpdate.Files.First(f => f.FileType == FileType.image));
-                       }
-                       var image = new File
-                       {
-                           FileName = System.IO.Path.GetFileName(upload.FileName),
-                           FileType = FileType.image,
-                           ContentType = upload.ContentType
-                       };
-                       using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                       {
-                           image.Content = reader.ReadBytes(upload.ContentLength);
-                       }
-                       reptileToUpdate.Files = new List<File> { image };
-                   }
+                    //if(upload != null && upload.ContentLength > 0)
+                    //{
+                    //    if (reptileToUpdate.Files.Any(f => f.FileType == FileType.image))
+                    //    {
+                    //        db.Files.Remove(reptileToUpdate.Files.First(f => f.FileType == FileType.image));
+                    //    }
+                    //    var image = new File
+                    //    {
+                    //        FileName = System.IO.Path.GetFileName(upload.FileName),
+                    //        FileType = FileType.image,
+                    //        ContentType = upload.ContentType
+                    //    };
+                    //    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    //    {
+                    //        image.Content = reader.ReadBytes(upload.ContentLength);
+                    //    }
+                    //    reptileToUpdate.Files = new List<File> { image };
+                    //}
+                    PhotoService photoService = new PhotoService(new Logger());
+                    reptile.imageURL = await photoService.UploadPhotoAsync(upload);
+
                     db.Entry(reptileToUpdate).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
@@ -270,7 +280,7 @@ namespace ReptileManager.Controllers
                catch (RetryLimitExceededException /* dex */)
                {
                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                   ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                   ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact support.");
                }
            }
             return View(reptileToUpdate);

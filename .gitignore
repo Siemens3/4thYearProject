@@ -8,8 +8,8 @@ App_Start/Startup.Auth.cs
 *.user
 *.sln.docstates
 
-PrivateSettings.config
-ConnectionStrings.config
+AppSecrets.config
+ConnectionString.config
 # Build results
 
 [Dd]ebug/

@@ -61,8 +61,8 @@ namespace ReptileManager
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "431452227144-s5bss7pfse9abmb1ndo2vatnt2h4gehc.apps.googleusercontent.com",
-                ClientSecret = "Ot_Rhn_EHXoofn4D-NUYZnOE"
+                ClientId = "GoogClientID",
+                ClientSecret = "GoogClientSecret"
             });
         }
     }

@@ -296,12 +296,17 @@
             </div>
             <div class="col-xs-6 col-sm-3">
 
-                @if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
+                @*@if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
                 {
 
                     <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
 
+                }*@
+                @if (Model.imageURL != null)
+                {
+                    <dd><img src="@Model.imageURL"  width="200" height="200"/></dd>
                 }
+              
 
             </div>
 

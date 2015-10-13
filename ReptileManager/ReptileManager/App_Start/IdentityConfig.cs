@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ReptileManager.Models;
 using SendGrid;
-using System.Net;
+using System;
 using System.Configuration;
+using System.Net;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 
 namespace ReptileManager
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            return configSendGridasync(message);
+            await configSendGridasync(message);
         }
 
-        private Task configSendGridasync(IdentityMessage message)
+        private async Task configSendGridasync(IdentityMessage message)
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
             myMessage.From = new System.Net.Mail.MailAddress(
-                                "stephenkenny@outlook.ie", "Reptile Manager");
+                                "stephenkenny@outlook.ie", "Reptile Care");
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;
@@ -46,11 +42,11 @@ namespace ReptileManager
             // Send the email.
             if (transportWeb != null)
             {
-                return transportWeb.DeliverAsync(myMessage);
+                await transportWeb.DeliverAsync(myMessage);
             }
             else
             {
-                return Task.FromResult(0);
+                await Task.FromResult(0);
             }
         }
         
@@ -91,7 +87,7 @@ namespace ReptileManager
                 RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = false,
-                RequireUppercase = false,
+                RequireUppercase = false
             };
 
             // Configure user lockout defaults
