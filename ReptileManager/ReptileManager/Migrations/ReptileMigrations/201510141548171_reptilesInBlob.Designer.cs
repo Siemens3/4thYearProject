@@ -7,13 +7,13 @@ namespace ReptileManager.Migrations.ReptileMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class reptilesImagesInBlob : IMigrationMetadata
+    public sealed partial class reptilesInBlob : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(reptilesImagesInBlob));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(reptilesInBlob));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510131510421_reptilesImagesInBlob"; }
+            get { return "201510141548171_reptilesInBlob"; }
         }
         
         string IMigrationMetadata.Source

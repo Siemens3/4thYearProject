@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Details";
-    
+
 }
 <link href="@Url.Content("~/Content/DetailsPage.css")" rel="stylesheet" type="text/css" />
 
@@ -12,25 +12,23 @@
 <script type="text/javascript" src="~/Scripts/modernizr-2.8.3.js"></script>
 
 
-    <style>
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+<style>
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
 
-.x.axis path {
-  display: none;
-}
+    .x.axis path {
+        display: none;
+    }
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
 </style>
 <h2>Details</h2>
 
@@ -297,16 +295,25 @@
             <div class="col-xs-6 col-sm-3">
 
                 @*@if (Model.Files.Any(f => f.FileType == ReptileManager.Models.FileType.image))
+                    {
+
+                        <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
+
+                    }*@
+                @if (Model.Images.Count > 0)
                 {
 
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
+                    <img src="@Model.Images.Where(i=>i.ProfileImage == true).FirstOrDefault().ImageURL" alt="image" width="200" height="200" />
 
-                }*@
-                @if (Model.imageURL != null)
-                {
-                    <dd><img src="@Model.imageURL"  width="200" height="200"/></dd>
                 }
-              
+                @*@if (Model.imageURL != null)
+                    {
+                        <dd><img src="@Model.imageURL"  width="200" height="200"/></dd>
+                    }*@
+
+
+
+
 
             </div>
 
@@ -527,7 +534,35 @@
     </div>
     <div class="details-list-separator"></div>
     <br />
-  
+
+    <div class="well">
+        <p style="font-size:18px">Images</p>
+        <div class="well" style="background-color: #fff">
+            <p style="font-size:18px;"></p>
+
+            @if (Model.Images.Count > 0)
+            {
+
+                foreach (var image in Model.Images.AsEnumerable().Where(i => i.ImageURL != null))
+                {
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="@image.ImageURL" alt="image" width="150" height="150" />
+                        </div>
+                        <div class="col-md-2">
+                            @Html.ActionLink("Set as Profile Image", "ProfileImage", new { id = image.ImageId }, new { @class = "btn btn-primary" })
+                        </div>
+                        <div class="col-md-1">
+                            @Html.ActionLink("Delete", "DeleteImage", new { id = image.ImageId }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+
     <div class="well">
         <p style="font-size:18px">Health Status</p>
         <div class="well" style="background-color: #fff">
@@ -539,18 +574,17 @@
     </div>
 
     <br />
-        @Html.Action("Chart", new { item = Model.ReptileId })
- </div>
+    @Html.Action("Chart", new { item = Model.ReptileId })
+</div>
 
 
 
 
-    <br />
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId }) 
-          @Html.ActionLink("Back to List", "Index")
+<br />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReptileId })
+    @Html.ActionLink("Back to List", "Index")
 </p>
 
-    <script type="text/javascript" src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
+<script type="text/javascript" src="~/Scripts/Highcharts-4.0.1/js/highcharts.js"></script>
 
-   

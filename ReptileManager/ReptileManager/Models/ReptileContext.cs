@@ -10,6 +10,9 @@ namespace ReptileManager.Models
         {
            
         }
+
+     
+
         public DbSet<Reptile> Reptiles { get; set; }
 
         public DbSet<Mating> Matings { get; set; }
@@ -39,5 +42,16 @@ namespace ReptileManager.Models
         public  DbSet<Length> Lengths { get; set; }
 
         public DbSet<File> Files { get; set; }
+
+        public DbSet<Images> Images { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Reptile>()
+        //        .HasMany(x => x.Images)
+        //        .WithRequired().WillCascadeOnDelete(true);
+
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

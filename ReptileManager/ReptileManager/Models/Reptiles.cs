@@ -3,19 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 
 
- 
+
 namespace ReptileManager.Models
 {
-   
-     public class Reptile
+
+    public class Reptile
     {
-        
+
+        public Reptile()
+        {
+            TimeStamp = DateTime.UtcNow;
+            Images = new List<Images>();
+        }
+
+
         public String ReptileId { get; set; } 
         // add so users can leave black for auto-assign
         // if a catagorie is created add a field so they can select the catagory 
@@ -69,19 +74,16 @@ namespace ReptileManager.Models
         public String Note { get; set; }
         public String SalesCardComment { get; set; }
 
-        public string imageURL { get; set; }
-        public string imageURLOne { get; set; }
-        public string imageURLTwo { get; set; }
-        public string imageURLThree { get; set; }
-        public string imageURLFour { get; set; }
-        public string imageURLFive { get; set; }
-        public string imageURLSix { get; set; }
-
+     
         //one to many
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<Mating> Matings { get; set; }
 
-       
+        public virtual ICollection<Images> Images { get; set; }
+            
+
+        
+
         public virtual ICollection<Notification> Notifications { get; set; }
 
         public virtual ICollection<Other> Others { get; set; }
@@ -122,10 +124,7 @@ namespace ReptileManager.Models
         }
        
 
-        public Reptile()
-        {
-            TimeStamp = DateTime.UtcNow;
-        }
+        
      
        
 
@@ -185,6 +184,16 @@ namespace ReptileManager.Models
 
        }
 
+
+    public class Images
+    {
+        [Key]
+        public int ImageId { get; set; }
+        public string ImageURL { get; set; }
+        public string ReptileId { get; set; }
+        public virtual Reptile Reptile { get; set; }
+        public bool ProfileImage { get; set; }
+    }
 
     public static class Status
     {

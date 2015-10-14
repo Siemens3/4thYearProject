@@ -1,12 +1,13 @@
 namespace ReptileManager.Migrations.ReptileMigrations
 {
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using ReptileManager.Models;
     using System.Collections.Generic;
-    internal sealed class Configuration : DbMigrationsConfiguration<ReptileManager.Models.ReptileContext>
+    using System.Data.Entity;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<ReptileContext>
     {
         public Configuration()
         {
@@ -14,10 +15,14 @@ namespace ReptileManager.Migrations.ReptileMigrations
             MigrationsDirectory = @"Migrations\ReptileMigrations";
             ContextKey = "ReptileManager.Models.ReptileContext";
             
+            
         }
 
-        protected override void Seed(ReptileManager.Models.ReptileContext context)
+     
+
+        protected override void Seed(ReptileContext context)
         {
+          
             var reptiles = new List<Reptile>
                {
                     new Reptile
@@ -55,6 +60,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
                          TubeBoxNumber = "2",
                          Note = "Bee is very aggressive",
                          SalesCardComment = "Snake is easy to care for but needs someone with some experience." 
+                         
                      },
                      new Reptile
                      {
@@ -797,6 +803,7 @@ namespace ReptileManager.Migrations.ReptileMigrations
                 }
             }
             context.SaveChanges();
+            
         }
     }
 }

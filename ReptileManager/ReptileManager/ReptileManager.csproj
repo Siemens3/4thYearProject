@@ -260,9 +260,9 @@
     <Compile Include="Migrations\ReptileMigrations\201504151258186_InitialCreate.Designer.cs">
       <DependentUpon>201504151258186_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ReptileMigrations\201510131510421_reptilesImagesInBlob.cs" />
-    <Compile Include="Migrations\ReptileMigrations\201510131510421_reptilesImagesInBlob.Designer.cs">
-      <DependentUpon>201510131510421_reptilesImagesInBlob.cs</DependentUpon>
+    <Compile Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.cs" />
+    <Compile Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.Designer.cs">
+      <DependentUpon>201510141548171_reptilesInBlob.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ReptileMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -884,8 +884,8 @@
     <EmbeddedResource Include="Migrations\ReptileMigrations\201504151258186_InitialCreate.resx">
       <DependentUpon>201504151258186_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ReptileMigrations\201510131510421_reptilesImagesInBlob.resx">
-      <DependentUpon>201510131510421_reptilesImagesInBlob.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.resx">
+      <DependentUpon>201510141548171_reptilesInBlob.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
