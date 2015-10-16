@@ -60,21 +60,27 @@ namespace ReptileManager.Controllers
             {
                 var imageRecord = await db.Images.Where(i => i.ImageId == id).FirstOrDefaultAsync();
                 var reptileId = imageRecord.ReptileId;
+                var setNewMainImage = new Images();
                 if (imageRecord.ProfileImage == true)
                 {
-                    var setNewMainImage = await db.Images.Where(i => i.ReptileId == imageRecord.ReptileId).FirstOrDefaultAsync();
-                    setNewMainImage.ProfileImage = true;
-                }
 
-                try
+                    db.Images.Remove(imageRecord);
+                    db.SaveChanges();
+
+
+                    setNewMainImage = db.Images.Where(i => i.ReptileId == reptileId).FirstOrDefault();
+                    setNewMainImage.ProfileImage = true;
+
+
+                    await db.SaveChangesAsync();
+                }
+                else
                 {
                     db.Images.Remove(imageRecord);
                     await db.SaveChangesAsync();
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message, "Change main image fuck up ");
-                }
+
+
 
                 return RedirectToAction("Details", new { id = reptileId });
             }
@@ -226,6 +232,16 @@ namespace ReptileManager.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if(reptile.ReptileId == null || reptile.ReptileId == string.Empty)
+                    {
+                        using (var db = new ReptileContext())
+                        {
+                            var lastReptileCreated = db.Reptiles.OrderByDescending(r=>r.ReptileId).FirstOrDefault().ReptileId;
+                            reptile.ReptileId = lastReptileCreated + 1;
+                        }
+
+                           
+                    }
 
                     //if (upload != null && upload.ContentLength > 0)
                     //{
@@ -246,7 +262,7 @@ namespace ReptileManager.Controllers
                     //}
                     // new image storage in blob
                     // reptile.images = new List<string>();
-                  
+
                     //
                     //{
 
@@ -337,7 +353,7 @@ namespace ReptileManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(string id, [Bind(Include = "ReptileId,Gender,SpeciesName,ScientificName,CommonName,Born,Morph,Venomous,Weight,WeightProgress,Origin,Food,FeedingType,AdultSize,Habitat,Breeder,BreederEmail,Cities,ClutchID,ForSale,Price,NickName,LicenseNumber,ChipNumber,SpeciesNumber,FatherNotInDb,MotherNotInDb,FeedInterval,DueDate,TubeBoxNumber,Note,SalesCardComment")] Reptile reptile,IEnumerable<HttpPostedFileBase> imageList)
+        public async Task<ActionResult> Edit(string id, [Bind(Include = "ReptileId,Gender,SpeciesName,ScientificName,CommonName,Born,Morph,Venomous,Weight,WeightProgress,Origin,Food,FeedingType,AdultSize,Habitat,Breeder,BreederEmail,Cities,ClutchID,ForSale,Price,NickName,LicenseNumber,ChipNumber,SpeciesNumber,FatherNotInDb,MotherNotInDb,FeedInterval,DueDate,TubeBoxNumber,Note,SalesCardComment")] Reptile reptile, IEnumerable<HttpPostedFileBase> imageList, IEnumerable<int> ImageIdList)
         {
             if (reptile.ReptileId == null)
             {
@@ -348,6 +364,7 @@ namespace ReptileManager.Controllers
             {
                 try
                 {
+
                     //if(upload != null && upload.ContentLength > 0)
                     //{
                     //    if (reptileToUpdate.Files.Any(f => f.FileType == FileType.image))
@@ -366,39 +383,83 @@ namespace ReptileManager.Controllers
                     //    }
                     //    reptileToUpdate.Files = new List<File> { image };
                     //}
-                    int i = 0;
-                    var imagesCheckForMain = db.Images.Where(i => i.ReptileId == reptileToUpdate.ReptileId && i.ProfileImage == true).Any();
-                    if(imagesCheckForMain)
+
+                 
+                    for (int i = 0; i < imageList.Count(); i++)
                     {
-                        i = 1;
-                    }
-                   
-                    foreach (var image in imageList)
-                    {
-                        Images im = new Images();
-                        if (i == 0)
+                        if (imageList.ElementAt(i) != null)
                         {
 
-                            im.ImageURL = await photoService.UploadPhotoAsync(image);
+                            for (int w = i; w < ImageIdList.Count(); w++)
+                            {
+
+                                if (w == i)
+                                {
+                                    Images im = new Images();
+                                    var oldImageId = ImageIdList.ElementAt(w);
+
+                                    var updateImageSlot = db.Images.Where(img => img.ImageId == oldImageId).FirstOrDefault();
+                                    var isProfile = false;
+                                    if (updateImageSlot.ProfileImage)
+                                    {
+                                        isProfile = true;
+                                    }
+                                    // db.Images.Remove(removeOldImage);
+
+
+                                    var newImage = imageList.ElementAt(w);
+                                    updateImageSlot.ImageURL = await photoService.UploadPhotoAsync(newImage);
+                                    updateImageSlot.ProfileImage = isProfile;
+                                
+                                    // reptile.Images.Add(im);
+
+                                }
+                            }
+
+                        }
+                        if (i > ImageIdList.Count())
+                        {
+                            i = imageList.Count();
+                        }
+
+
+                    }
+
+                    int j = 0;
+                    var imagesCheckForMain = db.Images.Where(i => i.ReptileId == reptileToUpdate.ReptileId && i.ProfileImage == true).Any();
+                    if (imagesCheckForMain)
+                    {
+                        j = 1;
+                    }
+
+                    for (int p = 0; p < imageList.Count(); p++)
+                    {
+                        if (j == 0)
+                        {
+                            Images im = new Images();
+                            im.ImageURL = await photoService.UploadPhotoAsync(imageList.ElementAt(p));
                             im.ReptileId = reptile.ReptileId;
                             im.ProfileImage = true;
-                            reptile.Images.Add(im);
+                            reptileToUpdate.Images.Add(im);
                         }
                         else
                         {
+                            if (p > ImageIdList.Count() && imageList.ElementAt(p) != null)
+                            {
+                                Images im = new Images();
+                                im.ImageURL = await photoService.UploadPhotoAsync(imageList.ElementAt(p));
+                                im.ReptileId = reptile.ReptileId;
+                                im.ProfileImage = false;
+                                reptileToUpdate.Images.Add(im);
+                            }
 
-
-                            im.ImageURL = await photoService.UploadPhotoAsync(image);
-                            im.ReptileId = reptile.ReptileId;
-                            im.ProfileImage = false;
-                            reptile.Images.Add(im);
                         }
-                        i++;
-
+                        j++;
                     }
 
                     db.Entry(reptileToUpdate).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
+                    db.SaveChanges();
+
                     return RedirectToAction("Index");
                 }
                 catch (RetryLimitExceededException /* dex */)

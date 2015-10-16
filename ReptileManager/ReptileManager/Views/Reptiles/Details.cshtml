@@ -299,13 +299,29 @@
 
                         <img src="~/File?id=@Model.Files.First(f => f.FileType == ReptileManager.Models.FileType.image).FileId" alt="image" width="200" height="200" />
 
-                    }*@
-                @if (Model.Images.Count > 0)
-                {
 
-                    <img src="@Model.Images.Where(i=>i.ProfileImage == true).FirstOrDefault().ImageURL" alt="image" width="200" height="200" />
+
+                    }*@
+                @{
+                    var noMain = string.Empty;
+
+                    var mainImage = Model.Images.Where(i => i.ProfileImage == true).FirstOrDefault();
+                    if (mainImage == null)
+                    {
+                        noMain = "No Image";
+                    }
+                    else
+                    {
+                        noMain = mainImage.ImageURL;
+                    }
+
+
 
                 }
+
+
+                <img src="@noMain" alt="image" width="200" height="200" />
+
                 @*@if (Model.imageURL != null)
                     {
                         <dd><img src="@Model.imageURL"  width="200" height="200"/></dd>
