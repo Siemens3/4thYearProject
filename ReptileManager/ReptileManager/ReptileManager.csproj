@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ShedsController.cs" />
     <Compile Include="Controllers\UltrasoundsController.cs" />
     <Compile Include="Controllers\WeightsController.cs" />
+    <Compile Include="CustomDataAnnotation\ImageAnnotations.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +264,10 @@
     <Compile Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.cs" />
     <Compile Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.Designer.cs">
       <DependentUpon>201510141548171_reptilesInBlob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ReptileMigrations\201510161434280_addedFartherMotherImage.cs" />
+    <Compile Include="Migrations\ReptileMigrations\201510161434280_addedFartherMotherImage.Designer.cs">
+      <DependentUpon>201510161434280_addedFartherMotherImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ReptileMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -299,6 +304,7 @@
     <Compile Include="Services\HealthStatus.cs" />
     <Compile Include="Services\HealthStatusVariables.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ReptileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -886,6 +892,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ReptileMigrations\201510141548171_reptilesInBlob.resx">
       <DependentUpon>201510141548171_reptilesInBlob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ReptileMigrations\201510161434280_addedFartherMotherImage.resx">
+      <DependentUpon>201510161434280_addedFartherMotherImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

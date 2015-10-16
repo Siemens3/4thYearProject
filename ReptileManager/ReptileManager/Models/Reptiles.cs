@@ -21,68 +21,71 @@ namespace ReptileManager.Models
         }
 
 
-        public String ReptileId { get; set; } 
+        public String ReptileId { get; set; }
         // add so users can leave black for auto-assign
         // if a catagorie is created add a field so they can select the catagory 
-        public byte[] QRCode { get;  set; }
-      
+        public byte[] QRCode { get; set; }
+
         public Gender Gender { get; set; }
         public String SpeciesName { get; set; }
+        [Required]
         public String ScientificName { get; set; }
         public String CommonName { get; set; }
 
+        [Required]
         [Column(TypeName = "datetime2")]
         public DateTime? Born { get; set; }
-        public String Morph { get; set; }
-        public Boolean Venomous { get; set; }
-
-        public Double Weight { get; set; }
+        public string Morph { get; set; }
+        public bool Venomous { get; set; }
+        [Required]
+        public double Weight { get; set; }
         public WeightProgress WeightProgress { get; set; }
-        public String Origin { get; set; }
-        public String Food { get; set; }
+        public string Origin { get; set; }
+        public string Food { get; set; }
         public FeedingType FeedingType { get; set; }
-        public Double AdultSize { get; set; }
-        public String Habitat { get; set; } 
-        public String Breeder { get; set; }
+        public double AdultSize { get; set; }
+        public string Habitat { get; set; }
+        public string Breeder { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        public String BreederEmail { get; set; }
+        public string BreederEmail { get; set; }
         // public add radio button for wild caught or CB
-        public String Cities { get; set; }
-        public String ClutchID { get; set; }
-        public Boolean ForSale { get; set; }
+        public string Cities { get; set; }
+        public string ClutchID { get; set; }
+        public bool ForSale { get; set; }
         [DataType(DataType.Currency)]
-        public String Price { get; set; }
-        public String NickName { get; set; }
-        public String LicenseNumber { get; set; }
-        public String ChipNumber { get; set; }
-        public String SpeciesNumber { get; set; }
-        // need to pull all male IDs        public String FatherId {get;set}
-        public String FatherNotInDb { get; set; }
-        // image public FartherImage {get; set;}
-      //  mother ID  public  String MotherId {get;set;}
-      public String MotherNotInDb { get; set; }
-        // image     public MotherImage {get; set;}
+        public string Price { get; set; }
+        public string NickName { get; set; }
+        public string LicenseNumber { get; set; }
+        public string ChipNumber { get; set; }
+        public string SpeciesNumber { get; set; }
+        // need to pull all male IDs        
+        public string FatherId { get; set; }
+        public string FatherNotInDb { get; set; }
+        public string FartherImage {get; set;}
+        //  mother ID  public  String MotherId {get;set;}
+        public string MotherNotInDb { get; set; }
+        public string MotherImage {get; set;}
         //drop down list again      public String Rack {get; set;}
-       public int FeedInterval { get; set; }
+        public int FeedInterval { get; set; }
 
-       [Column(TypeName = "datetime2")]
-       public DateTime TimeStamp { get; set; }
-      
+        [Column(TypeName = "datetime2")]
+        public DateTime TimeStamp { get; set; }
+
         public DateTime DueDate { get; set; }
-       public String TubeBoxNumber { get; set; }
-        public String Note { get; set; }
-        public String SalesCardComment { get; set; }
+        public string TubeBoxNumber { get; set; }
+        public string Note { get; set; }
+        public string SalesCardComment { get; set; }
 
-     
+
         //one to many
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<Mating> Matings { get; set; }
 
         public virtual ICollection<Images> Images { get; set; }
-            
 
-        
+
+
 
         public virtual ICollection<Notification> Notifications { get; set; }
 
@@ -92,28 +95,28 @@ namespace ReptileManager.Models
         public virtual ICollection<Defication> Defications { get; set; }
 
         public virtual ICollection<Cleaning> Cleanings { get; set; }
-      
+
         public virtual ICollection<Feeding> Feedings { get; set; }
         public virtual ICollection<BreedingCycle> BreedingCycles { get; set; }
         public virtual ICollection<Ultrasound> Ultrasound { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Weight> Weights { get; set; }
 
-         public virtual ICollection<Length> Lengths { get; set; }
+        public virtual ICollection<Length> Lengths { get; set; }
 
-       
-        public String DueForFeeding() 
+
+        public String DueForFeeding()
         {
-          
+
             var daysSinceLastUpdate = (DateTime.UtcNow - TimeStamp.AddDays(FeedInterval)).Days;
 
             if (daysSinceLastUpdate < 0)
                 return Status.Default;
-    
+
 
             switch (daysSinceLastUpdate)
             {
-              
+
                 case 0:
                     return Status.Today;
                 case 1:
@@ -122,21 +125,21 @@ namespace ReptileManager.Models
                     return Status.TwoOrMoreDaysLate;
             }
         }
-       
 
-        
-     
-       
+
+
+
+
 
         public Image QrGen()
-          {
-              QRCodeEncoder encoder = new QRCodeEncoder();
-              encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
-              encoder.QRCodeScale = 3;
-              Bitmap img = encoder.Encode(ReptileId);
-              return img;
-              
-          }
+        {
+            QRCodeEncoder encoder = new QRCodeEncoder();
+            encoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.H;
+            encoder.QRCodeScale = 3;
+            Bitmap img = encoder.Encode(ReptileId);
+            return img;
+
+        }
 
         public byte[] imageToByteArray(System.Drawing.Image imageIn)
         {
@@ -144,45 +147,45 @@ namespace ReptileManager.Models
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             return ms.ToArray();
         }
-        
-    /*   public  Image byteArrayToImage(Byte[] QR)
-        {
-            MemoryStream ms = new MemoryStream(QR);
-            Image returnImage = Image.FromStream(ms);
-            return returnImage;
-        }
-         public static Image resizeImage(Image imgToResize, Size size)
-                {
-                     int sourceWidth = imgToResize.Width;
-                     int sourceHeight = imgToResize.Height;
 
-                       float nPercent = 0;
-                       float nPercentW = 0;
-                       float nPercentH = 0;
+        /*   public  Image byteArrayToImage(Byte[] QR)
+            {
+                MemoryStream ms = new MemoryStream(QR);
+                Image returnImage = Image.FromStream(ms);
+                return returnImage;
+            }
+             public static Image resizeImage(Image imgToResize, Size size)
+                    {
+                         int sourceWidth = imgToResize.Width;
+                         int sourceHeight = imgToResize.Height;
 
-                       nPercentW = ((float)size.Width / (float)sourceWidth);
-                       nPercentH = ((float)size.Height / (float)sourceHeight);
+                           float nPercent = 0;
+                           float nPercentW = 0;
+                           float nPercentH = 0;
 
-                       if (nPercentH < nPercentW)
-                          nPercent = nPercentH;
-                       else
-                          nPercent = nPercentW;
+                           nPercentW = ((float)size.Width / (float)sourceWidth);
+                           nPercentH = ((float)size.Height / (float)sourceHeight);
 
-                       int destWidth = (int)(sourceWidth * nPercent);
-                       int destHeight = (int)(sourceHeight * nPercent);
+                           if (nPercentH < nPercentW)
+                              nPercent = nPercentH;
+                           else
+                              nPercent = nPercentW;
 
-                       Bitmap b = new Bitmap(destWidth, destHeight);
-                       Graphics g = Graphics.FromImage((Image)b);
-                       g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                           int destWidth = (int)(sourceWidth * nPercent);
+                           int destHeight = (int)(sourceHeight * nPercent);
 
-                       g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
-                       g.Dispose();
+                           Bitmap b = new Bitmap(destWidth, destHeight);
+                           Graphics g = Graphics.FromImage((Image)b);
+                           g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
-                       return (Image)b;
-                    }
-         */
+                           g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+                           g.Dispose();
 
-       }
+                           return (Image)b;
+                        }
+             */
+
+    }
 
 
     public class Images
@@ -204,5 +207,5 @@ namespace ReptileManager.Models
     }
 
 
-       
-    }
+
+}

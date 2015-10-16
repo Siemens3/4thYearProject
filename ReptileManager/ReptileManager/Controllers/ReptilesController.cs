@@ -2,6 +2,7 @@
 using Persistence;
 using ReptileManager.Models;
 using ReptileManager.Services;
+using ReptileManager.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -213,8 +214,14 @@ namespace ReptileManager.Controllers
 
         // GET: Reptiles/Create
         //  [Authorize(Roles = "canEdit")]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            using (var db = new ReptileContext())
+            {
+                ReptileViewModel reptile = new ReptileViewModel();
+                reptile.ListOfMales = await db.Reptiles.Where(r => r.Gender == Gender.Male).ToListAsync();
+                    reptile.ListOfMales =
+                }
             return View();
         }
 
@@ -232,15 +239,15 @@ namespace ReptileManager.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if(reptile.ReptileId == null || reptile.ReptileId == string.Empty)
+                    if (reptile.ReptileId == null || reptile.ReptileId == string.Empty)
                     {
                         using (var db = new ReptileContext())
                         {
-                            var lastReptileCreated = db.Reptiles.OrderByDescending(r=>r.ReptileId).FirstOrDefault().ReptileId;
+                            var lastReptileCreated = db.Reptiles.OrderByDescending(r => r.ReptileId).FirstOrDefault().ReptileId;
                             reptile.ReptileId = lastReptileCreated + 1;
                         }
 
-                           
+
                     }
 
                     //if (upload != null && upload.ContentLength > 0)
@@ -384,7 +391,7 @@ namespace ReptileManager.Controllers
                     //    reptileToUpdate.Files = new List<File> { image };
                     //}
 
-                 
+
                     for (int i = 0; i < imageList.Count(); i++)
                     {
                         if (imageList.ElementAt(i) != null)
@@ -410,7 +417,7 @@ namespace ReptileManager.Controllers
                                     var newImage = imageList.ElementAt(w);
                                     updateImageSlot.ImageURL = await photoService.UploadPhotoAsync(newImage);
                                     updateImageSlot.ProfileImage = isProfile;
-                                
+
                                     // reptile.Images.Add(im);
 
                                 }
